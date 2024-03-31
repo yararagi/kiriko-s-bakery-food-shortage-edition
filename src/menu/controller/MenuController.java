@@ -21,7 +21,7 @@ public class MenuController implements Runnable {
     @Override
     public void run() {
         while(statoApp==Stato.MENU){
-            System.out.println(statoApp);
+            
             if(raylib.core.IsKeyPressed(Keyboard.KEY_DOWN)){
                 if(scelta>=view.getnScritte()-1){
                     scelta=0;
