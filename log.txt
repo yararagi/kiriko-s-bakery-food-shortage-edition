@@ -8,9 +8,9 @@ un paio d'ore la sera per impostare il progetto, definire la struttura iniziale 
 """""""aggiunti font e semafori"""""""
 
 ✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦
-[][]
+[31 marzo][yari☆]
 
-//
+fatto il grosso del funzionamento del controller del menu, ora è possibile selezionare le voci sul menu
 
 ✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦
 [][]
