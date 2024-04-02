@@ -10,7 +10,6 @@ import com.raylib.java.raymath.Vector2;
 import com.raylib.java.text.Font;
 
 import gioco.model.Giocatore;
-import gioco.model.Giocatori;
 
 public class RisultatiView {
     private Font fontRegular;
