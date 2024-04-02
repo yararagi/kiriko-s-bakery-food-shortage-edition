@@ -8,7 +8,7 @@ import com.raylib.java.core.input.Keyboard;
 import gioco.model.Stato;
 import menu.view.MenuView;
 
-public class MenuController implements Runnable {
+public class MenuController {
     private byte scelta;
     private MenuView view;
 
@@ -18,7 +18,7 @@ public class MenuController implements Runnable {
         this.view=view; 
     }
 
-    @Override
+
     public void run() {
         while(statoApp==Stato.MENU){
             

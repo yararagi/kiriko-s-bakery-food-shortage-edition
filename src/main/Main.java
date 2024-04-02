@@ -15,7 +15,6 @@ public class Main {
         Semaphore gestore = new Semaphore(1); //DA IMPLEMENTARE UNA VOLTA SVILUPPATE E TESTATE LE ALTRE SEZIONI DELL'APP
         MenuController menuController= new MenuController(new MenuView());
         while (statoApp!=Stato.EXIT) {
-            System.out.println(statoApp);
             //--------------------TEST---------------------
             switch(statoApp){
                 case MENU:
@@ -29,9 +28,10 @@ public class Main {
                 case GIOCO:
                 statoApp= Stato.MENU;
                     break;
-                default:
+                    default:
                     break;
             }
+                System.out.println(statoApp);
             //---------------------------------------------
                 
         }
