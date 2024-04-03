@@ -5,6 +5,7 @@ import static main.Main.raylib;
 import com.raylib.java.core.rCore;
 import com.raylib.java.raymath.Vector2;
 import com.raylib.java.text.Font;
+import com.raylib.java.text.rText;
 
 import gioco.model.Stato;
 
@@ -40,7 +41,7 @@ public class MenuView {
         raylib.core.BeginDrawing();
         raylib.core.ClearBackground(Color.BLACK);
         for(byte i=0;i<3;i++){
-            raylib.text.DrawTextEx(fontRegular, scritte[i], new Vector2(((screenX/2) - (raylib.text.MeasureText(scritte[i], fontSize)/2)), 175+offsetScritte*i), fontSize, 0, (i==scelta) ? (new Color(164, 22, 26, 150)) : (Color.RAYWHITE));
+            raylib.text.DrawTextEx(fontRegular, scritte[i], new Vector2(((screenX/2) - (int)(rText.MeasureTextEx(fontRegular, scritte[i], fontSize, 0).getX()/2)), 175+offsetScritte*i), fontSize, 0, (i==scelta) ? (new Color(164, 22, 26, 150)) : (Color.RAYWHITE));
         }
         raylib.core.EndDrawing();
     }

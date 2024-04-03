@@ -8,6 +8,7 @@ import com.raylib.java.core.Color;
 import com.raylib.java.core.rCore;
 import com.raylib.java.raymath.Vector2;
 import com.raylib.java.text.Font;
+import com.raylib.java.text.rText;
 
 import gioco.model.Giocatore;
 
@@ -27,10 +28,10 @@ public class RisultatiView {
     public void paintRisultati(List<Giocatore> lista) {
         if(lista!=null && lista.size()!=0){
             for(byte i=0;i<lista.size();i++){
-                raylib.text.DrawTextEx(fontRegular, lista.get(i).toString(), new Vector2(((rCore.GetScreenWidth()/2) - (raylib.text.MeasureText(lista.get(i).toString(), fontSize)/2 )), 75+offsetScritte*i), fontSize, 0, Color.RAYWHITE);
+                raylib.text.DrawTextEx(fontRegular, lista.get(i).toString(), new Vector2(((rCore.GetScreenWidth()/2) - (rText.MeasureTextEx(fontRegular, lista.get(i).toString(), fontSize,0).getX()/2 )), 75+offsetScritte*i), fontSize, 0, Color.RAYWHITE);
             }
         }else{
-            raylib.text.DrawTextEx(fontRegular, "nessun punteggio", new Vector2(((rCore.GetScreenWidth()/2) - (raylib.text.MeasureText("nessun punteggio", fontSize)/2)), rCore.GetScreenHeight()/2 ), 45, 0, Color.RAYWHITE);
+            raylib.text.DrawTextEx(fontRegular, "nessun punteggio", new Vector2(((rCore.GetScreenWidth()/2) - (rText.MeasureTextEx(fontRegular,"nessun punteggio", fontSize,0).getX()/2)), rCore.GetScreenHeight()/2 ), 45, 0, Color.RAYWHITE);
         }
     }
 
