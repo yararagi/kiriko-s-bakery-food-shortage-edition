@@ -1,5 +1,7 @@
 package gioco.controller;
 
+import static main.Main.raylib;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;

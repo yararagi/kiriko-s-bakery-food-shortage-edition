@@ -31,6 +31,7 @@ public class MenuController {
     public void run() {
         recuperaRisultati();
         while(statoApp==Stato.MENU){
+            //view.paintBackground();
             view.paintScritte(scelta);
 
             if(raylib.core.IsKeyPressed(Keyboard.KEY_DOWN)){
