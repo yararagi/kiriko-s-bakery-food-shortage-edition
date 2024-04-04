@@ -10,7 +10,7 @@ import menu.view.RisultatiView;
 
 public class Main {
     public static Stato statoApp= Stato.MENU; 
-    public static Raylib raylib= new Raylib(800,450,"kiriko's bakery: food shortage");
+    public static Raylib raylib= new Raylib(1920,1080,"kiriko's bakery: food shortage");
    
     public static void main(String[] args) {
         //Semaphore gestore = new Semaphore(1); //DA IMPLEMENTARE UNA VOLTA SVILUPPATE E TESTATE LE ALTRE SEZIONI DELL'APP
