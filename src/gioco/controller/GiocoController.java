@@ -1,7 +1,5 @@
 package gioco.controller;
 
-import static main.Main.raylib;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,6 +22,10 @@ public class GiocoController {
          g.lista.add(new Giocatore(25,"6rfg"));
          g.lista.add(new Giocatore(22,"7rr"));
          g.lista.add(new Giocatore(25,"8rfg"));
+         g.lista.add(new Giocatore(22,"7rr"));
+         g.lista.add(new Giocatore(25,"8rfg"));
+         g.lista.add(new Giocatore(22234566,"11rr"));
+   
         try {
          FileOutputStream fileOut = new FileOutputStream("data/playerData.ser");
          ObjectOutputStream out = new ObjectOutputStream(fileOut);
