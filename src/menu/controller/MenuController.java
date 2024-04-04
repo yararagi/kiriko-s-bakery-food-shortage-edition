@@ -31,8 +31,7 @@ public class MenuController {
     public void run() {
         recuperaRisultati();
         while(statoApp==Stato.MENU){
-            view.paintBackground();
-            view.paintScritte(scelta);
+            view.paintMenu(scelta);
 
             if(raylib.core.IsKeyPressed(Keyboard.KEY_DOWN)){
                 if(scelta>=view.getnScritte()-1){
@@ -71,9 +70,8 @@ public class MenuController {
     public void runRisultati(){
         short indexToShow=0;
         while(statoApp==Stato.RISULTATI){
-            rView.paintRisultati((giocatori.lista.size()>4)?(giocatori.lista.subList(indexToShow, indexToShow+4)):(giocatori.lista));
-            rView.paintBack();
-            if(raylib.core.IsKeyPressed(Keyboard.KEY_DOWN) && indexToShow+4< giocatori.lista.size()){   indexToShow++;  }
+            rView.paintSchermataRisultati((giocatori.lista.size()>7)?(giocatori.lista.subList(indexToShow, indexToShow+7)):(giocatori.lista));
+            if(raylib.core.IsKeyPressed(Keyboard.KEY_DOWN) && indexToShow+7< giocatori.lista.size()){   indexToShow++;  }
             if(raylib.core.IsKeyPressed(Keyboard.KEY_UP) && indexToShow>0){   indexToShow--;  }
             if(raylib.core.IsKeyPressed(Keyboard.KEY_ENTER)){
                 statoApp=Stato.MENU;
