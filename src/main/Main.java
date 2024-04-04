@@ -32,8 +32,6 @@ public class Main {
                     default:
                     break;
             }
-            
-                System.out.println(statoApp);
             //---------------------------------------------
                 
         }

@@ -68,10 +68,15 @@ public class MenuController {
     }
 
     public void runRisultati(){
-        short indexToShow=0;
+        short indexToShow=0, howManyToShow=7;
         while(statoApp==Stato.RISULTATI){
-            rView.paintSchermataRisultati((giocatori.lista.size()>7)?(giocatori.lista.subList(indexToShow, indexToShow+7)):(giocatori.lista));
-            if(raylib.core.IsKeyPressed(Keyboard.KEY_DOWN) && indexToShow+7< giocatori.lista.size()){   indexToShow++;  }
+            if(giocatori.lista.size()>howManyToShow){
+                rView.paintSchermataRisultati(giocatori.lista.subList(indexToShow, indexToShow+howManyToShow), (indexToShow==0)?(false):(true),((howManyToShow+indexToShow)<giocatori.lista.size())?(true):(false) );
+            }else{
+                rView.paintSchermataRisultati(giocatori.lista, false, false);
+            }
+            
+            if(raylib.core.IsKeyPressed(Keyboard.KEY_DOWN) && indexToShow+howManyToShow< giocatori.lista.size()){   indexToShow++;  }
             if(raylib.core.IsKeyPressed(Keyboard.KEY_UP) && indexToShow>0){   indexToShow--;  }
             if(raylib.core.IsKeyPressed(Keyboard.KEY_ENTER)){
                 statoApp=Stato.MENU;

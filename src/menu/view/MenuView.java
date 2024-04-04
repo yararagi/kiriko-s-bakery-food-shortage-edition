@@ -23,13 +23,13 @@ public class MenuView {
 
     public MenuView() {
         nScritte=3;
-        offsetScritte=75;
+        offsetScritte=100;
         scritte = new String[nScritte];
         scritte[0]=Stato.GIOCA.toString().toLowerCase();
         scritte[1]=Stato.RISULTATI.toString().toLowerCase();
         scritte[2]=Stato.ESCI.toString().toLowerCase();
-        fontSize=45;
-        fontRegular= raylib.text.LoadFont("font\\MagicBreadRegular.ttf");
+        fontSize=55;
+        fontRegular= raylib.text.LoadFontEx("font\\MagicBreadRegular.ttf",fontSize, null, 0);
         backGround= rTextures.LoadTexture("texture\\background\\city-town-pixel-artwork-aesthetic.jpg");
     }
 
