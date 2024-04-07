@@ -2,8 +2,8 @@ package main;
  
 import com.raylib.java.Raylib;
 
-import gioco.model.Stato;
 import menu.controller.MenuController;
+import menu.model.Stato;
 import menu.view.MenuView;
 import menu.view.RisultatiView;
 

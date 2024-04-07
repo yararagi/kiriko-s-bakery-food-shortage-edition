@@ -1,4 +1,4 @@
-package gioco.model;
+package menu.model;
 
 public enum Stato {
     MENU,

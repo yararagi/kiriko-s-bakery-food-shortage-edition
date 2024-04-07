@@ -7,7 +7,8 @@ import com.raylib.java.text.Font;
 import com.raylib.java.textures.Texture2D;
 import com.raylib.java.textures.rTextures;
 
-import gioco.model.Stato;
+import gioco.view.SalvaView;
+import menu.model.Stato;
 
 import com.raylib.java.core.Color;
 

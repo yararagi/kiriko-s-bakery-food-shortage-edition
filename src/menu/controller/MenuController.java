@@ -10,7 +10,7 @@ import java.io.ObjectInputStream;
 import com.raylib.java.core.input.Keyboard;
 
 import gioco.model.Giocatori;
-import gioco.model.Stato;
+import menu.model.Stato;
 import menu.view.MenuView;
 import menu.view.RisultatiView;
 
