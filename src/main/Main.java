@@ -39,5 +39,8 @@ public class Main {
             //---------------------------------------------
                 
         }
+
+        risultatiGiocatori.salvaRisultati();
+        menuController.runUnload();
     }
 }

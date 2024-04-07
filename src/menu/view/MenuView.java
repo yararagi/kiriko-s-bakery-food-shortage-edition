@@ -4,6 +4,7 @@ import static main.Main.raylib;
 
 import com.raylib.java.raymath.Vector2;
 import com.raylib.java.text.Font;
+import com.raylib.java.text.rText;
 import com.raylib.java.textures.Texture2D;
 import com.raylib.java.textures.rTextures;
 
@@ -56,5 +57,8 @@ public class MenuView {
         raylib.core.EndDrawing();
     }
 
-    
+    public void unload(){
+        rText.UnloadFont(fontRegular);
+        raylib.textures.UnloadTexture(backGround);
+    }
 }

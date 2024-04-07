@@ -80,4 +80,9 @@ public class MenuController {
         }
     }
 
+    public void runUnload(){
+        view.unload();
+        rView.unload();
+    }
+
 }

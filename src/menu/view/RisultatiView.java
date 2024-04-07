@@ -56,4 +56,8 @@ public class RisultatiView {
         this.paintBack();
         raylib.core.EndDrawing();
     }
+
+    public void unload(){
+        rText.UnloadFont(fontRegular);
+    }
 }
