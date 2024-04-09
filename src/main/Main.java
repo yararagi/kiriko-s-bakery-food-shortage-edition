@@ -2,7 +2,9 @@ package main;
  
 import com.raylib.java.Raylib;
 
+import gioco.controller.GiocoController;
 import gioco.model.RisultatiGiocatori;
+import gioco.view.SalvaView;
 import menu.controller.MenuController;
 import menu.model.Stato;
 import menu.view.MenuView;
@@ -20,6 +22,7 @@ public class Main {
         RisultatiGiocatori risultatiGiocatori= new RisultatiGiocatori();
         
         MenuController menuController= new MenuController(new MenuView(), new RisultatiView(), risultatiGiocatori);
+        GiocoController giocoController= new GiocoController(new SalvaView(), risultatiGiocatori);
 
         while (statoApp!=Stato.ESCI) {
             //--------------------TEST---------------------
@@ -28,7 +31,7 @@ public class Main {
                     menuController.run(); 
                     break;
                 case GIOCA:
-                    statoApp= Stato.MENU;
+                    giocoController.salva();
                     break;
                 case ESCI:
                     break;
