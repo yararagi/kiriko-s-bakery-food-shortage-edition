@@ -45,7 +45,7 @@ public class RisultatiView {
     }
 
     private void paintBack() {
-        raylib.text.DrawTextEx(fontRegular, "indietro", new Vector2((int)((screenX/2) - (int)(raylib.text.MeasureText("indietro", fontSize+15)/2)), rCore.GetScreenHeight()-150), fontSize+15, 0, new Color(164, 22, 26, 150));
+        raylib.text.DrawTextEx(fontRegular, "indietro", new Vector2((int)((screenX/2) - (int)(rText.MeasureTextEx(fontRegular,"indietro", fontSize+15, 0).getX()/2)), rCore.GetScreenHeight()-150), fontSize+15, 0, new Color(164, 22, 26, 150));
     }
     
     public void paintSchermataRisultati(List<Giocatore> lista, boolean up, boolean down){
