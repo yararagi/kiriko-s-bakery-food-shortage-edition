@@ -26,18 +26,7 @@ public class GiocoController {
 //-------------------------TEST SALVATAGGIO DATI-------------------------
     public static void main(String[] args) {
          RisultatiGiocatori g=new RisultatiGiocatori();
-         g.add(new Giocatore(2,"1"));
-         g.add(new Giocatore(333,"2"));
-         g.add(new Giocatore(22,"3"));
-         g.add(new Giocatore(25,"4rfg"));
-         g.add(new Giocatore(22,"5rr"));
-         g.add(new Giocatore(25,"6rfg"));
-         g.add(new Giocatore(22,"7rr"));
-         g.add(new Giocatore(25,"8rfg"));
-         g.add(new Giocatore(22,"7rr"));
-         g.add(new Giocatore(25,"8rfg"));
-         g.add(new Giocatore(22234566,"11rr"));
-   
+         
          
          g.salvaRisultati();
          //g.recuperaRisultati();
@@ -61,6 +50,9 @@ statoPartita = StatoPartita.SALVA;
                     nome[nLettere] = (char)key;
                     nLettere++;
                 }
+                if(key==32){
+                    contaFrame=0;
+                }
 
                 key = raylib.core.GetCharPressed();
             }
@@ -76,9 +68,11 @@ statoPartita = StatoPartita.SALVA;
                 if(nLettere<MAX_INPUT_CHARS && ((contaFrame/50)%2) == 0){
                     nome[nLettere]=' ';
                 }
-                risultatiGiocatori.add(new Giocatore(punteggio, String.copyValueOf(nome).trim().replaceAll(" +", " ")));
-                statoPartita=StatoPartita.GIOCANDO;
-                statoApp=Stato.MENU;
+                if(!String.copyValueOf(nome).replaceAll(" +", "").equals("")){
+                    risultatiGiocatori.add(new Giocatore(punteggio, String.copyValueOf(nome).trim().replaceAll(" +", " ")));
+                    statoPartita=StatoPartita.GIOCANDO;
+                    statoApp=Stato.MENU;
+                }
             }else{
                 if(nLettere<MAX_INPUT_CHARS && ((contaFrame/50)%2) == 0){
                     nome[nLettere]='_';
