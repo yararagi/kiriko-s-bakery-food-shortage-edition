@@ -18,6 +18,7 @@ public class Main {
         
         raylib.core.MaximizeWindow();
         raylib.core.SetWindowState(0x00000002);
+        raylib.core.SetTargetFPS(60);
 
         RisultatiGiocatori risultatiGiocatori= new RisultatiGiocatori();
         
