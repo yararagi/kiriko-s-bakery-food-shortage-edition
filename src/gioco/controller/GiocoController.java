@@ -3,6 +3,7 @@ package gioco.controller;
 import static main.Main.raylib;
 import static main.Main.statoApp;
 
+import com.raylib.java.core.rCore;
 import com.raylib.java.core.input.Keyboard;
 
 import gioco.model.Giocatore;
@@ -57,11 +58,12 @@ statoPartita = StatoPartita.SALVA;
                 key = raylib.core.GetCharPressed();
             }
 
-            if (raylib.core.IsKeyPressed(Keyboard.KEY_BACKSPACE)){
+            if (rCore.IsKeyDown(Keyboard.KEY_BACKSPACE) && ((contaFrame)%5) == 0){
                 nLettere--;
                 if (nLettere < 0){ nLettere = 0; }
                 nome[nLettere]=' ';
                 if(nLettere< MAX_INPUT_CHARS-1){ nome[nLettere+1]=' '; }
+                contaFrame=0;
             }
             
             if(raylib.core.IsKeyPressed(Keyboard.KEY_ENTER)){
