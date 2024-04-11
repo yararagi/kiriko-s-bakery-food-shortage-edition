@@ -40,12 +40,15 @@ public class GiocoController {
         char[] nome= new char[]{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
         int key, contaFrame=0;
         byte nLettere=0;
+        boolean indietro=true;
 //
 statoPartita = StatoPartita.SALVA;
 //
         while(statoPartita == StatoPartita.SALVA){
+
             salvaView.paintFinestraSalvataggio(String.copyValueOf(nome));
             key= raylib.core.GetCharPressed();
+            
             while (key > 0){
                 if ((key >= 32) && (key <= 125) && (nLettere < MAX_INPUT_CHARS)){
                     nome[nLettere] = (char)key;
@@ -58,12 +61,16 @@ statoPartita = StatoPartita.SALVA;
                 key = raylib.core.GetCharPressed();
             }
 
-            if (rCore.IsKeyDown(Keyboard.KEY_BACKSPACE) && ((contaFrame)%5) == 0){
+            if (rCore.IsKeyDown(Keyboard.KEY_BACKSPACE) && ((((contaFrame)%5) == 0) || indietro)){
+            	indietro=false;
                 nLettere--;
                 if (nLettere < 0){ nLettere = 0; }
                 nome[nLettere]=' ';
                 if(nLettere< MAX_INPUT_CHARS-1){ nome[nLettere+1]=' '; }
                 contaFrame=0;
+            }
+            if(raylib.core.IsKeyUp(Keyboard.KEY_BACKSPACE)) {
+            	indietro=true;
             }
             
             if(raylib.core.IsKeyPressed(Keyboard.KEY_ENTER)){
