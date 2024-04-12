@@ -3,6 +3,7 @@ package menu.view;
 import static main.Main.raylib;
 
 import com.raylib.java.raymath.Vector2;
+import com.raylib.java.shapes.Rectangle;
 import com.raylib.java.text.Font;
 import com.raylib.java.text.rText;
 import com.raylib.java.textures.Texture2D;
@@ -19,6 +20,8 @@ public class MenuView {
     private byte fontSize;
     private Font fontRegular;
     private Texture2D backGround;
+    private Vector2[] vociMenu;
+    private Rectangle[] vociMenuBtn;
     //background image
     // boh altro
 
@@ -32,6 +35,11 @@ public class MenuView {
         fontSize=55;
         fontRegular= raylib.text.LoadFontEx("font\\MagicBreadRegular.ttf",fontSize, null, 0);
         backGround= rTextures.LoadTexture("texture\\background\\city-town-pixel-artwork-aesthetic.jpg");
+        vociMenu= new Vector2[]{new Vector2(150, 200+offsetScritte), new Vector2(150, 200+offsetScritte*2), new Vector2(150, 200+offsetScritte*3) };
+        vociMenuBtn= new Rectangle[3];
+        for(byte i=0; i<3;i++){
+            vociMenuBtn[i]=new Rectangle(vociMenu[i].x-10, vociMenu[i].y-10, rText.MeasureTextEx(fontRegular, scritte[i], fontSize, 1).getX(), rText.MeasureTextEx(fontRegular, scritte[i], fontSize, 1).getY());
+        }
     }
 
     public byte getnScritte() {
@@ -41,7 +49,7 @@ public class MenuView {
     private void paintScritte(byte scelta){
         raylib.textures.DrawTexture(backGround, 0, 0, Color.BLANK);
         for(byte i=0;i<3;i++){
-            raylib.text.DrawTextEx(fontRegular, scritte[i], new Vector2(150, 200+offsetScritte*i), fontSize, 0, (i==scelta) ? (Color.WHITE) : (new Color(164, 22, 26, 150)));
+            raylib.text.DrawTextEx(fontRegular, scritte[i], vociMenu[i], fontSize, 0, (i==scelta) ? (Color.WHITE) : (new Color(164, 22, 26, 150)));
         }
     }
 
@@ -60,5 +68,9 @@ public class MenuView {
     public void unload(){
         rText.UnloadFont(fontRegular);
         raylib.textures.UnloadTexture(backGround);
+    }
+
+    public Rectangle[] getVociMenuBtn() {
+        return vociMenuBtn;
     }
 }

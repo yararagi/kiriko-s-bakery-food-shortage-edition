@@ -32,7 +32,7 @@ public class Main {
                     menuController.run(); 
                     break;
                 case GIOCA:
-                    giocoController.salva();
+                    giocoController.run();
                     break;
                 case ESCI:
                     break;

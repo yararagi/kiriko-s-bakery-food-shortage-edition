@@ -7,6 +7,7 @@ import java.util.List;
 import com.raylib.java.core.Color;
 import com.raylib.java.core.rCore;
 import com.raylib.java.raymath.Vector2;
+import com.raylib.java.shapes.Rectangle;
 import com.raylib.java.text.Font;
 import com.raylib.java.text.rText;
 
@@ -17,12 +18,20 @@ public class RisultatiView {
     private byte fontSize;
     private byte offsetScritte;
     private int screenX;
+    private Vector2 back;
+    private Rectangle backBtn;
+    private Vector2[] triangoloScrollUp;
+    private Vector2[] triangoloScrollDown;
 
     public RisultatiView(){
         fontSize = 40;
         fontRegular = raylib.text.LoadFontEx("font\\MagicBreadRegular.ttf",fontSize,null,0);
         screenX=rCore.GetScreenWidth();
         offsetScritte=100;
+        back=new Vector2((int)((screenX/2) - (int)(rText.MeasureTextEx(fontRegular,"indietro", fontSize+15, 0).getX()/2)), rCore.GetScreenHeight()-150);
+        backBtn= new Rectangle(back.x-10, back.y-10, rText.MeasureTextEx(fontRegular,"indietro", fontSize+15, 0).x+20, rText.MeasureTextEx(fontRegular,"indietro", fontSize+15, 0).y+20);
+        triangoloScrollUp= new Vector2[]{new Vector2((screenX/2)+400, 689.4f), new Vector2((screenX/2)+375, 732.7f), new Vector2((screenX/2)+425, 732.7f)};
+        triangoloScrollDown= new Vector2[]{new Vector2((screenX/2)+425, 757.7f), new Vector2((screenX/2)+375, 757.7f), new Vector2((screenX/2)+400, 800)};
     }
 
     private void paintRisultati(List<Giocatore> lista) {
@@ -37,15 +46,15 @@ public class RisultatiView {
     }
     private void paintScrollGuide(boolean up, boolean down){
         if(up){
-            raylib.shapes.DrawTriangle(new Vector2((screenX/2)+400, 689.4f), new Vector2((screenX/2)+375, 732.7f), new Vector2((screenX/2)+425, 732.7f), Color.RAYWHITE);
+            raylib.shapes.DrawTriangle(triangoloScrollUp[0], triangoloScrollUp[1], triangoloScrollUp[2], Color.RAYWHITE);
         }
         if(down){
-            raylib.shapes.DrawTriangle(new Vector2((screenX/2)+425, 757.7f), new Vector2((screenX/2)+375, 757.7f), new Vector2((screenX/2)+400, 800), Color.RAYWHITE);
+            raylib.shapes.DrawTriangle(triangoloScrollDown[0], triangoloScrollDown[1], triangoloScrollDown[2], Color.RAYWHITE);
         }
     }
 
     private void paintBack() {
-        raylib.text.DrawTextEx(fontRegular, "indietro", new Vector2((int)((screenX/2) - (int)(rText.MeasureTextEx(fontRegular,"indietro", fontSize+15, 0).getX()/2)), rCore.GetScreenHeight()-150), fontSize+15, 0, new Color(164, 22, 26, 150));
+        raylib.text.DrawTextEx(fontRegular, "indietro", back, fontSize+15, 0, (raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), backBtn)?(Color.WHITE):(new Color(164, 22, 26, 150)) ));
     }
     
     public void paintSchermataRisultati(List<Giocatore> lista, boolean up, boolean down){
@@ -59,5 +68,17 @@ public class RisultatiView {
 
     public void unload(){
         rText.UnloadFont(fontRegular);
+    }
+
+    public Rectangle getBackBtn() {
+        return backBtn;
+    }
+
+    public Vector2[] getTriangoloScrollUp() {
+        return triangoloScrollUp;
+    }
+
+    public Vector2[] getTriangoloScrollDown() {
+        return triangoloScrollDown;
     }
 }

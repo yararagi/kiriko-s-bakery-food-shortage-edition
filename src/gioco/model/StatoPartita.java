@@ -4,5 +4,6 @@ public enum StatoPartita {
     GIOCANDO,
     PAUSA,
     SALVA,
-    FINE
+    FINE,
+    TORNAALMENU
 }

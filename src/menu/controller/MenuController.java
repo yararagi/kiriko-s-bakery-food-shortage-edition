@@ -3,7 +3,9 @@ package menu.controller;
 import static main.Main.raylib;
 import static main.Main.statoApp;
 
+import com.raylib.java.core.rCore;
 import com.raylib.java.core.input.Keyboard;
+import com.raylib.java.core.input.Mouse.MouseButton;
 
 import gioco.model.RisultatiGiocatori;
 import menu.model.Stato;
@@ -59,6 +61,26 @@ public class MenuController {
                 }
                 scelta=0;
             }
+
+            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), view.getVociMenuBtn()[0])){
+                scelta=0;
+                if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+                    statoApp=Stato.GIOCA;
+                }
+            }
+            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), view.getVociMenuBtn()[1])){
+                scelta=1;
+                if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+                    statoApp=Stato.RISULTATI;
+                    runRisultati();
+                }
+            }
+            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), view.getVociMenuBtn()[2])){
+                scelta=2;
+                if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+                    statoApp=Stato.ESCI;
+                }
+            }
             
         }
     }
@@ -72,11 +94,25 @@ public class MenuController {
                 rView.paintSchermataRisultati(risultatiGiocatori.getListaGiocatori(), false, false);
             }
             
-            if(raylib.core.IsKeyPressed(Keyboard.KEY_DOWN) && indexToShow+howManyToShow< risultatiGiocatori.getListaGiocatori().size()){   indexToShow++;  }
-            if(raylib.core.IsKeyPressed(Keyboard.KEY_UP) && indexToShow>0){   indexToShow--;  }
+            if(raylib.core.IsKeyPressed(Keyboard.KEY_DOWN) && indexToShow+howManyToShow< risultatiGiocatori.getListaGiocatori().size()){
+                indexToShow++;
+            }
+            if(raylib.core.IsKeyPressed(Keyboard.KEY_UP) && indexToShow>0){
+                indexToShow--;
+            }
             if(raylib.core.IsKeyPressed(Keyboard.KEY_ENTER)){
                 statoApp=Stato.MENU;
             }
+            if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)&&raylib.shapes.CheckCollisionPointTriangle(rCore.GetMousePosition(), rView.getTriangoloScrollDown()[0],rView.getTriangoloScrollDown()[1], rView.getTriangoloScrollDown()[2]) && indexToShow+howManyToShow< risultatiGiocatori.getListaGiocatori().size()){
+                indexToShow++;
+            }
+            if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)&&raylib.shapes.CheckCollisionPointTriangle(rCore.GetMousePosition(), rView.getTriangoloScrollUp()[0],rView.getTriangoloScrollUp()[1], rView.getTriangoloScrollUp()[2]) && indexToShow>0){
+                indexToShow--;
+            }
+            if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)&&raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), rView.getBackBtn())){
+                statoApp=Stato.MENU;
+            }
+            
         }
     }
 
