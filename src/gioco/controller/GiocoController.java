@@ -57,7 +57,7 @@ public class GiocoController {
             }
         }
     }
-
+/*
     private void gioca(){
         Rectangle temp=new Rectangle(0, 0, 100, 100);
         punteggio=0;
@@ -83,6 +83,21 @@ public class GiocoController {
             raylib.core.EndDrawing();
         }
     }
+*/
+    private void gioca(){
+        
+        statoPartita= StatoPartita.GIOCANDO;
+        while (statoPartita == StatoPartita.GIOCANDO) {
+            raylib.core.BeginDrawing();
+            raylib.core.ClearBackground(Color.BLACK);
+           
+
+
+
+            raylib.core.EndDrawing();
+        }
+    }
+    
 
     private void salva(short punteggio){
         final byte MAX_INPUT_CHARS=14;

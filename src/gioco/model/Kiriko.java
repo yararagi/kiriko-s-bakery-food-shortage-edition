@@ -1,0 +1,31 @@
+package gioco.model;
+
+import java.util.ArrayList;
+
+import com.raylib.java.shapes.Rectangle;
+import com.raylib.java.textures.Texture2D;
+
+public class Kiriko implements Runnable{
+
+    private Texture2D texture;
+    private Rectangle box;
+    private ArrayList<Pane> pani;
+
+    @Override
+    public void run() {
+        try {
+            for (int i= 0; i<3; i++){
+                rifornisci();
+                Thread.sleep(10000);
+            }
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private void rifornisci() {
+        
+    }
+    
+}

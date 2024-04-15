@@ -38,7 +38,7 @@ public class MenuView {
         vociMenu= new Vector2[]{new Vector2(150, 200+offsetScritte), new Vector2(150, 200+offsetScritte*2), new Vector2(150, 200+offsetScritte*3) };
         vociMenuBtn= new Rectangle[3];
         for(byte i=0; i<3;i++){
-            vociMenuBtn[i]=new Rectangle(vociMenu[i].x-10, vociMenu[i].y-10, rText.MeasureTextEx(fontRegular, scritte[i], fontSize, 1).getX(), rText.MeasureTextEx(fontRegular, scritte[i], fontSize, 1).getY());
+            vociMenuBtn[i]=new Rectangle(vociMenu[i].x-10, vociMenu[i].y-5, rText.MeasureTextEx(fontRegular, scritte[i], fontSize, 1).getX()+20, rText.MeasureTextEx(fontRegular, scritte[i], fontSize, 1).getY()+10);
         }
     }
 
