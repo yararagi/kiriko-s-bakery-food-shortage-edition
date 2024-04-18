@@ -10,6 +10,11 @@ public class Kiriko implements Runnable{
     private Texture2D texture;
     private Rectangle box;
     private ArrayList<Pane> pani;
+    private Quest quest;
+
+    public Kiriko (Quest quest){
+        this.quest=quest;
+    }
 
     @Override
     public void run() {
@@ -25,7 +30,10 @@ public class Kiriko implements Runnable{
     }
 
     private void rifornisci() {
-        
+        short i;
+        for(i=0; i<(quest.getBaguetteRichieste()/3)+(Math.random()*5)+1;i++)    pani.add(new Pane(TipoPane.BAGUETTE));
+        for(i=0; i<(quest.getDonutRichieste()/3)+(Math.random()*5)+1;i++)    pani.add(new Pane(TipoPane.DONUT));
+        for(i=0; i<(quest.getBriocheRichieste()/3)+(Math.random()*5)+1;i++)    pani.add(new Pane(TipoPane.BRIOCHE));
     }
     
 }
