@@ -22,7 +22,6 @@ public class MenuView {
     private Texture2D backGround;
     private Vector2[] vociMenu;
     private Rectangle[] vociMenuBtn;
-    //background image
     // boh altro
 
     public MenuView() {
@@ -34,7 +33,6 @@ public class MenuView {
         scritte[2]=Stato.ESCI.toString().toLowerCase();
         fontSize=55;
         fontRegular= raylib.text.LoadFontEx("font\\MagicBreadRegular.ttf",fontSize, null, 0);
-        //backGround= rTextures.LoadTexture("texture\\background\\city-town-pixel-artwork-aesthetic.jpg");
         backGround= rTextures.LoadTexture("texture\\background\\sharpen_city-town-pixel-artwork-aesthetic-1600x900-wallpx.com.jpg");
         vociMenu= new Vector2[]{new Vector2(150, 200+offsetScritte), new Vector2(150, 200+offsetScritte*2), new Vector2(150, 200+offsetScritte*3) };
         vociMenuBtn= new Rectangle[3];
