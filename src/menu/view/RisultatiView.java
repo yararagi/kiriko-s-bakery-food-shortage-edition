@@ -25,7 +25,7 @@ public class RisultatiView {
 
     public RisultatiView(){
         fontSize = 40;
-        fontRegular = raylib.text.LoadFontEx("font\\MagicBreadRegular.ttf",fontSize,null,0);
+        fontRegular = raylib.text.LoadFontEx("font/MagicBreadRegular.ttf",fontSize,null,0);
         screenX=rCore.GetScreenWidth();
         offsetScritte=100;
         back=new Vector2((int)((screenX/2) - (int)(rText.MeasureTextEx(fontRegular,"indietro", fontSize+15, 0).getX()/2)), rCore.GetScreenHeight()-150);

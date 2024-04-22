@@ -19,7 +19,7 @@ public class SalvaView {
 
     public SalvaView(){
         fontSize= 30;
-        fontRegular= raylib.text.LoadFontEx("font\\MagicBreadRegular.ttf",fontSize, null, 0);
+        fontRegular= raylib.text.LoadFontEx("font/MagicBreadRegular.ttf",fontSize, null, 0);
 
         float width, height;
         width= rCore.GetScreenWidth()/4;
