@@ -34,7 +34,8 @@ public class MenuView {
         scritte[2]=Stato.ESCI.toString().toLowerCase();
         fontSize=55;
         fontRegular= raylib.text.LoadFontEx("font\\MagicBreadRegular.ttf",fontSize, null, 0);
-        backGround= rTextures.LoadTexture("texture\\background\\city-town-pixel-artwork-aesthetic.jpg");
+        //backGround= rTextures.LoadTexture("texture\\background\\city-town-pixel-artwork-aesthetic.jpg");
+        backGround= rTextures.LoadTexture("texture\\background\\sharpen_city-town-pixel-artwork-aesthetic-1600x900-wallpx.com.jpg");
         vociMenu= new Vector2[]{new Vector2(150, 200+offsetScritte), new Vector2(150, 200+offsetScritte*2), new Vector2(150, 200+offsetScritte*3) };
         vociMenuBtn= new Rectangle[3];
         for(byte i=0; i<3;i++){
@@ -47,14 +48,13 @@ public class MenuView {
     }
 
     private void paintScritte(byte scelta){
-        raylib.textures.DrawTexture(backGround, 0, 0, Color.BLANK);
         for(byte i=0;i<3;i++){
             raylib.text.DrawTextEx(fontRegular, scritte[i], vociMenu[i], fontSize, 0, (i==scelta) ? (Color.WHITE) : (new Color(164, 22, 26, 150)));
         }
     }
 
     private void paintBackground (){
-        raylib.textures.DrawTextureEx(backGround,new Vector2(0, 0), 0, 1.1f, Color.WHITE);
+        raylib.textures.DrawTextureEx(backGround,new Vector2(0, 0), 0, 1.2f, Color.WHITE);
     }
 
     public void paintMenu(byte scelta){
