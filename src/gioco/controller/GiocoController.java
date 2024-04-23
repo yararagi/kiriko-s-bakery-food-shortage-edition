@@ -6,13 +6,14 @@ import static main.Main.statoApp;
 import com.raylib.java.core.Color;
 import com.raylib.java.core.rCore;
 import com.raylib.java.core.input.Keyboard;
-import com.raylib.java.core.input.Mouse.MouseButton;
 import com.raylib.java.shapes.Rectangle;
 import com.raylib.java.shapes.rShapes;
 
 import gioco.model.Giocatore;
+import gioco.model.Model;
 import gioco.model.RisultatiGiocatori;
 import gioco.model.StatoPartita;
+import gioco.model.TipoPane;
 import gioco.view.SalvaView;
 import menu.model.Stato;
 
@@ -21,10 +22,12 @@ public class GiocoController {
     private SalvaView salvaView;
     private RisultatiGiocatori risultatiGiocatori;
     short punteggio;
+    Model model;
 
-    public GiocoController(SalvaView salvaView, RisultatiGiocatori risultatiGiocatori){
+    public GiocoController(SalvaView salvaView, RisultatiGiocatori risultatiGiocatori, Model model){
         this.salvaView= salvaView;
         this.risultatiGiocatori= risultatiGiocatori;
+        this.model= model;
     }
 
 //-------------------------TEST SALVATAGGIO DATI-------------------------
@@ -87,10 +90,26 @@ public class GiocoController {
     private void gioca(){
         
         statoPartita= StatoPartita.GIOCANDO;
+        model.kiriko.run();
         while (statoPartita == StatoPartita.GIOCANDO) {
             raylib.core.BeginDrawing();
             raylib.core.ClearBackground(Color.BLACK);
-           
+            
+            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(0,0,100,100))){
+                model.bancone.prendiPane(TipoPane.BRIOCHE);
+                System.out.println(model.bancone.getNumBriocheDisponinbili());
+            }
+            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(100,0,100,100))){
+                model.bancone.prendiPane(TipoPane.DONUT);
+                System.out.println(model.bancone.getNumDonutDisponinbili());
+            }
+            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(200,0,100,100))){
+                model.bancone.prendiPane(TipoPane.BAGUETTE);
+                System.out.println(model.bancone.getNumBaguetteDisponinbili());
+            }
+            rShapes.DrawRectangleRec(new Rectangle(200,0,100,100), Color.GOLD);
+            rShapes.DrawRectangleRec(new Rectangle(0,0,100,100), Color.BEIGE);
+            rShapes.DrawRectangleRec(new Rectangle(100,0,100,100), Color.BROWN);
 
 
 
