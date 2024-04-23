@@ -3,7 +3,7 @@ package gioco.model;
 import com.raylib.java.shapes.Rectangle;
 import com.raylib.java.textures.Texture2D;
 
-public class Kiriko implements Runnable{
+public class Kiriko extends Thread{
 
     private Texture2D texture;
     private Rectangle box;
@@ -20,7 +20,7 @@ public class Kiriko implements Runnable{
         try {
             for (int i= 0; i<3; i++){
                 rifornisci();
-                Thread.sleep(10000);
+                Thread.sleep(5000);
             }
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block

@@ -6,6 +6,7 @@ import static main.Main.statoApp;
 import com.raylib.java.core.Color;
 import com.raylib.java.core.rCore;
 import com.raylib.java.core.input.Keyboard;
+import com.raylib.java.core.input.Mouse.MouseButton;
 import com.raylib.java.shapes.Rectangle;
 import com.raylib.java.shapes.rShapes;
 
@@ -90,20 +91,20 @@ public class GiocoController {
     private void gioca(){
         
         statoPartita= StatoPartita.GIOCANDO;
-        model.kiriko.run();
+        model.kiriko.start();
         while (statoPartita == StatoPartita.GIOCANDO) {
             raylib.core.BeginDrawing();
             raylib.core.ClearBackground(Color.BLACK);
             
-            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(0,0,100,100))){
+            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(0,0,100,100))&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
                 model.bancone.prendiPane(TipoPane.BRIOCHE);
                 System.out.println(model.bancone.getNumBriocheDisponinbili());
             }
-            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(100,0,100,100))){
+            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(100,0,100,100))&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
                 model.bancone.prendiPane(TipoPane.DONUT);
                 System.out.println(model.bancone.getNumDonutDisponinbili());
             }
-            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(200,0,100,100))){
+            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(200,0,100,100))&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
                 model.bancone.prendiPane(TipoPane.BAGUETTE);
                 System.out.println(model.bancone.getNumBaguetteDisponinbili());
             }
