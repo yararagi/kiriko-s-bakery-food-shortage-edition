@@ -3,9 +3,7 @@ package gioco.model;
 import java.util.Vector;
 
 public class Bancone {
-    private Vector<Pane> briocheDisponinbili;
-    private Vector<Pane> donutDisponinbili;
-    private Vector<Pane> baguetteDisponinbili;
+    private Vector<Pane> briocheDisponinbili, donutDisponinbili, baguetteDisponinbili;
 
     public Bancone(){
         briocheDisponinbili=new Vector<>();

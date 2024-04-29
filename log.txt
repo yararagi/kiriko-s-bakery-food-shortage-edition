@@ -70,9 +70,9 @@ lavorazione background menu con migliroamenti vari
 inizio meccanismo di gioco
 
 ✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦
-[][]
+[29 aprile][yari☆]
 
-//
+inizio consumatori e sistemato (a livello di forma) un paio di metodi
 
 ✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦
 [][]

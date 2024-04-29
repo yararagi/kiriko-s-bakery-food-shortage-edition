@@ -7,28 +7,29 @@ import com.raylib.java.core.Color;
 import com.raylib.java.core.rCore;
 import com.raylib.java.core.input.Keyboard;
 import com.raylib.java.core.input.Mouse.MouseButton;
-import com.raylib.java.shapes.Rectangle;
-import com.raylib.java.shapes.rShapes;
 
 import gioco.model.Giocatore;
-import gioco.model.Model;
+import gioco.model.ModelGioco;
 import gioco.model.RisultatiGiocatori;
 import gioco.model.StatoPartita;
 import gioco.model.TipoPane;
 import gioco.view.SalvaView;
+import gioco.view.PartitaView;
 import menu.model.Stato;
 
 public class GiocoController {
     public static StatoPartita statoPartita=StatoPartita.GIOCANDO;
     private SalvaView salvaView;
     private RisultatiGiocatori risultatiGiocatori;
-    short punteggio;
-    Model model;
+    private short punteggio;
+    private ModelGioco model;
+    private PartitaView partitaView;
 
-    public GiocoController(SalvaView salvaView, RisultatiGiocatori risultatiGiocatori, Model model){
+    public GiocoController(SalvaView salvaView, PartitaView partitaView, RisultatiGiocatori risultatiGiocatori, ModelGioco model){
         this.salvaView= salvaView;
         this.risultatiGiocatori= risultatiGiocatori;
         this.model= model;
+        this.partitaView= partitaView;
     }
 
 //-------------------------TEST SALVATAGGIO DATI-------------------------
@@ -96,28 +97,36 @@ public class GiocoController {
             raylib.core.BeginDrawing();
             raylib.core.ClearBackground(Color.BLACK);
             
-            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(0,0,100,100))&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+            if(didPlayerTakeBrioche() == true){
                 model.bancone.prendiPane(TipoPane.BRIOCHE);
                 System.out.println(model.bancone.getNumBriocheDisponinbili());
             }
-            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(100,0,100,100))&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+            if(didPlayerTakeDonut() == true){
                 model.bancone.prendiPane(TipoPane.DONUT);
                 System.out.println(model.bancone.getNumDonutDisponinbili());
             }
-            if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), new Rectangle(200,0,100,100))&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+            if(didPlayerTakeBaguette() == true){
                 model.bancone.prendiPane(TipoPane.BAGUETTE);
                 System.out.println(model.bancone.getNumBaguetteDisponinbili());
             }
-            rShapes.DrawRectangleRec(new Rectangle(200,0,100,100), Color.GOLD);
-            rShapes.DrawRectangleRec(new Rectangle(0,0,100,100), Color.BEIGE);
-            rShapes.DrawRectangleRec(new Rectangle(100,0,100,100), Color.BROWN);
+           
+            partitaView.paintCeste();
 
 
 
             raylib.core.EndDrawing();
         }
     }
-    
+
+    private boolean didPlayerTakeBaguette(){
+        return (raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), partitaView.getCestaBaguette())&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT));
+    }
+    private boolean didPlayerTakeBrioche(){
+        return (raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), partitaView.getCestaBrioche())&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT));
+    }
+    private boolean didPlayerTakeDonut(){
+        return (raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), partitaView.getCestaDonut())&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT));
+    }
 
     private void salva(short punteggio){
         final byte MAX_INPUT_CHARS=14;
