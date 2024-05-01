@@ -62,57 +62,37 @@ public class GiocoController {
             }
         }
     }
-/*
-    private void gioca(){
-        Rectangle temp=new Rectangle(0, 0, 100, 100);
-        punteggio=0;
-        statoPartita= StatoPartita.GIOCANDO;
-        while (statoPartita == StatoPartita.GIOCANDO) {
-            raylib.core.BeginDrawing();
-            raylib.core.ClearBackground(Color.BLACK);
-            rShapes.DrawRectangleRec(temp, Color.GOLD);
-            raylib.text.DrawText("(test, not the actual game obv) click the square 20 times", 800, 800, 35, Color.GOLD);
-            temp.x+=1;
-            temp.y+=0.5f;
 
-            if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)&&raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), temp)){
-                temp.height+=5;
-                temp.width+=5;
-                punteggio++;
-            }
-
-            if(temp.height>=200){
-                statoPartita= StatoPartita.SALVA;
-            }
-            
-            raylib.core.EndDrawing();
-        }
-    }
-*/
     private void gioca(){
         
         statoPartita= StatoPartita.GIOCANDO;
-        model.kiriko.start();
+        model.start();
+        
         while (statoPartita == StatoPartita.GIOCANDO) {
             raylib.core.BeginDrawing();
             raylib.core.ClearBackground(Color.BLACK);
             
             if(didPlayerTakeBrioche() == true){
-                model.bancone.prendiPane(TipoPane.BRIOCHE);
-                System.out.println(model.bancone.getNumBriocheDisponinbili());
+                model.prendiPane(TipoPane.BRIOCHE); 
+                System.out.println("player ha preso brioche, rimaste:"+model.getNumBriocheDisponinbili());
             }
             if(didPlayerTakeDonut() == true){
-                model.bancone.prendiPane(TipoPane.DONUT);
-                System.out.println(model.bancone.getNumDonutDisponinbili());
+                model.prendiPane(TipoPane.DONUT);
+                System.out.println("player ha preso donut, rimaste:"+model.getNumDonutDisponinbili());
             }
             if(didPlayerTakeBaguette() == true){
-                model.bancone.prendiPane(TipoPane.BAGUETTE);
-                System.out.println(model.bancone.getNumBaguetteDisponinbili());
+                model.prendiPane(TipoPane.BAGUETTE);
+                System.out.println("player ha preso baguette, rimaste:"+model.getNumBaguetteDisponinbili());
             }
            
             partitaView.paintCeste();
 
-
+            if( model.isQuestCompleted()){
+                model.drainPermits();
+                model.prossimoLivello();
+                /*per ora finisce qui
+                in teoria dovrebbe andare al livello succ*/statoPartita= StatoPartita.SALVA;
+            }
 
             raylib.core.EndDrawing();
         }

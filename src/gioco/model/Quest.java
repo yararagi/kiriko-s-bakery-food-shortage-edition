@@ -24,4 +24,15 @@ public class Quest {
     public int getDonutRichieste() {
         return paniRichiesti.get(TipoPane.DONUT);
     }
+
+    public void presoPane(TipoPane tipoPane){
+        if(paniRichiesti.get(tipoPane)>0){
+            paniRichiesti.replace(tipoPane, paniRichiesti.get(tipoPane)-1);
+        }
+        System.out.println("quest "+tipoPane+" " +paniRichiesti.get(tipoPane));
+    }
+
+    public boolean isQuestCompleted(){
+        return (paniRichiesti.get(TipoPane.BAGUETTE)==0 && paniRichiesti.get(TipoPane.DONUT)==0 && paniRichiesti.get(TipoPane.BRIOCHE)==0);
+    }
 }

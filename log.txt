@@ -75,9 +75,9 @@ inizio meccanismo di gioco
 inizio consumatori e sistemato (a livello di forma) un paio di metodi
 
 ✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦
-[][]
+[1 maggio][yari☆]
 
-//
+check quest, consimatori implementati, iniziando ad implementare i livelli
 
 ✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦
 [][]
