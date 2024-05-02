@@ -20,7 +20,7 @@ public class Kiriko extends Thread{
         try {
             for (int i= 0; i<3; i++){
                 rifornisci();
-                Thread.sleep(5000);
+                Thread.sleep(97500);
             }
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block

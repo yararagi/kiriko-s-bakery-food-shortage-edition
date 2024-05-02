@@ -25,6 +25,7 @@ public class ModelGioco {
 
     public void prossimoLivello(){
         quest= new Quest((short)(nLivello+1));
+        //kiriko.start();
     }
 
     public void start() {

@@ -17,7 +17,7 @@ public class Consumer extends Thread {
     public void run() {
         try {
             while(GiocoController.statoPartita.equals(StatoPartita.GIOCANDO)){
-                Thread.sleep((long)((Math.random()*2500)+350)); //per non farli accedere tutti assieme bph
+                Thread.sleep((long)((Math.random()*2500)+500)); //per non farli accedere tutti assieme bph
                 semaphore.acquire();
                 switch((int)(Math.random()*3)){
                     case 0:

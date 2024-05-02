@@ -3,6 +3,9 @@ package gioco.controller;
 import static main.Main.raylib;
 import static main.Main.statoApp;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.raylib.java.core.Color;
 import com.raylib.java.core.rCore;
 import com.raylib.java.core.input.Keyboard;
@@ -24,12 +27,14 @@ public class GiocoController {
     private short punteggio;
     private ModelGioco model;
     private PartitaView partitaView;
+    private Timer timerRound;
 
     public GiocoController(SalvaView salvaView, PartitaView partitaView, RisultatiGiocatori risultatiGiocatori, ModelGioco model){
         this.salvaView= salvaView;
         this.risultatiGiocatori= risultatiGiocatori;
         this.model= model;
         this.partitaView= partitaView;
+        this.timerRound= new Timer();
     }
 
 //-------------------------TEST SALVATAGGIO DATI-------------------------
@@ -67,7 +72,21 @@ public class GiocoController {
         
         statoPartita= StatoPartita.GIOCANDO;
         model.start();
-        
+        timerRound.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    if(model.isQuestCompleted()==false){
+                        statoPartita= StatoPartita.SALVA;
+                    }else{
+                        model.drainPermits();
+                        model.prossimoLivello();
+                        System.out.println("ai vint");
+                        //intermezzo livello
+                    }
+                System.out.println("oosos");
+                }
+                
+            }, 30000, 30000);
         while (statoPartita == StatoPartita.GIOCANDO) {
             raylib.core.BeginDrawing();
             raylib.core.ClearBackground(Color.BLACK);
@@ -87,12 +106,7 @@ public class GiocoController {
            
             partitaView.paintCeste();
 
-            if( model.isQuestCompleted()){
-                model.drainPermits();
-                model.prossimoLivello();
-                /*per ora finisce qui
-                in teoria dovrebbe andare al livello succ*/statoPartita= StatoPartita.SALVA;
-            }
+            
 
             raylib.core.EndDrawing();
         }
