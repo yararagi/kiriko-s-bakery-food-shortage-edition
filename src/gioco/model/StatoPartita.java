@@ -5,5 +5,6 @@ public enum StatoPartita {
     PAUSA,
     SALVA,
     FINE,
-    TORNAALMENU
+    TORNAALMENU, 
+    INTERMEZZO
 }

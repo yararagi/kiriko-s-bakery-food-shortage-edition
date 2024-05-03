@@ -30,6 +30,7 @@ public class GiocoController {
     private PartitaView partitaView;
     private Timer timerRound;
     private MyGate intermezzoLock;
+    private double tempoInizio;
 
     public GiocoController(SalvaView salvaView, PartitaView partitaView, RisultatiGiocatori risultatiGiocatori, ModelGioco model){
         this.salvaView= salvaView;
@@ -38,6 +39,7 @@ public class GiocoController {
         this.partitaView= partitaView;
         this.timerRound= new Timer();
         this.intermezzoLock= model.getIntermezzoLock();
+        tempoInizio=0;
     }
 
 //-------------------------TEST SALVATAGGIO DATI-------------------------
@@ -65,16 +67,19 @@ public class GiocoController {
                 case TORNAALMENU:
                     statoApp= Stato.MENU;
                     break;
+                case INTERMEZZO:
+                    intermezzo();
+                    break;
                 default:
                     break;
             }
         }
     }
 
-    private double tempoInizio=0;
+    
     private void gioca(){
-        statoPartita= StatoPartita.GIOCANDO;
         model.startPartita();
+
         timerRound.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
@@ -83,12 +88,12 @@ public class GiocoController {
                     }else{
                         tempoInizio= rCore.GetTime();
                         model.preparaProssimoLivello();
-                        intermezzoLock.lockAndWait();
-                        model.startProssimoLivello(); 
+                        intermezzoLock.lockAndWait(); 
                     }
                 }
                 
             }, 30000, 30000);
+            
         while (statoPartita == StatoPartita.GIOCANDO) {
             raylib.core.BeginDrawing();
             raylib.core.ClearBackground(Color.BLACK);
@@ -109,10 +114,7 @@ public class GiocoController {
             partitaView.paintCeste();
 
             if(intermezzoLock.isLocked()){
-                raylib.text.DrawFPS(500, 500);
-                if(((int)(rCore.GetTime()-tempoInizio))>=10){
-                    intermezzoLock.unlock();
-                } 
+                statoPartita= StatoPartita.INTERMEZZO;
             }
 
             raylib.core.EndDrawing();
@@ -129,6 +131,20 @@ public class GiocoController {
         return (raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), partitaView.getCestaDonut())&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT));
     }
 
+    private void intermezzo(){
+        while (statoPartita == StatoPartita.INTERMEZZO) {
+            raylib.core.BeginDrawing();
+            raylib.core.ClearBackground(Color.BLACK);
+            raylib.text.DrawFPS(500, 500);
+            System.out.print("c");
+            if(((int)(rCore.GetTime()-tempoInizio))>=10){
+                statoPartita=StatoPartita.GIOCANDO;
+                intermezzoLock.unlock();
+            } 
+            raylib.core.EndDrawing();
+        }
+    }
+    
     private void salva(short punteggio){
         final byte MAX_INPUT_CHARS=14;
         char[] nome= new char[]{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};

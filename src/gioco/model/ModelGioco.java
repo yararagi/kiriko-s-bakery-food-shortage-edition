@@ -1,7 +1,7 @@
 package gioco.model;
 
+import java.lang.Thread.State;
 import java.util.ArrayList;
-import java.util.concurrent.Semaphore;
 
 public class ModelGioco {
     private Kiriko kiriko;
@@ -23,9 +23,6 @@ public class ModelGioco {
         }
     }
 
-    public void startProssimoLivello(){
-        kiriko.start();
-    }
     public void preparaProssimoLivello(){
         nLivello+=1;
         quest= new Quest((short)(nLivello+1));
@@ -33,9 +30,13 @@ public class ModelGioco {
     }
 
     public void startPartita() {
-        kiriko.start();
+        if(kiriko.getState()==State.NEW){
+            kiriko.start();
+        }
         for(byte i=0; i<3;i++){
-            consumers.get(i).start();
+            if(consumers.get(i).getState()==State.NEW){
+                consumers.get(i).start();
+            }        
         }
     }
 
