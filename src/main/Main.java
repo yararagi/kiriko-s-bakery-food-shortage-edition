@@ -4,6 +4,7 @@ import com.raylib.java.Raylib;
 
 import gioco.controller.GiocoController;
 import gioco.model.ModelGioco;
+import gioco.model.MyGate;
 import gioco.model.RisultatiGiocatori;
 import gioco.view.PartitaView;
 import gioco.view.SalvaView;
@@ -25,7 +26,7 @@ public class Main {
         RisultatiGiocatori risultatiGiocatori= new RisultatiGiocatori();
         
         MenuController menuController= new MenuController(new MenuView(), new RisultatiView(), risultatiGiocatori);
-        GiocoController giocoController= new GiocoController(new SalvaView(),new PartitaView(), risultatiGiocatori, new ModelGioco());
+        GiocoController giocoController= new GiocoController(new SalvaView(),new PartitaView(), risultatiGiocatori, new ModelGioco(new MyGate()));
 
         while (statoApp!=Stato.ESCI) {
             //--------------------TEST---------------------

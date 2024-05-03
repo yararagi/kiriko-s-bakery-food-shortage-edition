@@ -1,16 +1,14 @@
 package gioco.model;
 
-import java.util.concurrent.Semaphore;
-
 import gioco.controller.GiocoController;
 
 public class Consumer extends Thread {
     private Bancone bancone;
-    private Semaphore semaphore;
+    private MyGate lock;
 
-    public Consumer(Bancone bancone, Semaphore semaphore){
+    public Consumer(Bancone bancone, MyGate lock){
         this.bancone= bancone;
-        this.semaphore= semaphore;
+        this.lock=lock;
     }
 
     @Override
@@ -18,7 +16,7 @@ public class Consumer extends Thread {
         try {
             while(GiocoController.statoPartita.equals(StatoPartita.GIOCANDO)){
                 Thread.sleep((long)((Math.random()*2500)+500)); //per non farli accedere tutti assieme bph
-                semaphore.acquire();
+                lock.tryToPassThrough();
                 switch((int)(Math.random()*3)){
                     case 0:
                         bancone.prendiPane(TipoPane.DONUT);
@@ -37,11 +35,9 @@ public class Consumer extends Thread {
                         break;
                 }
                 Thread.sleep(1000); //il tempo dell'animazione
-                semaphore.release();
                 Thread.sleep(3000);
             }
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

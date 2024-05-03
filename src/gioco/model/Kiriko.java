@@ -18,14 +18,18 @@ public class Kiriko extends Thread{
     @Override
     public void run() {
         try {
-            for (int i= 0; i<3; i++){
-                rifornisci();
-                Thread.sleep(97500);
-            }
+            rifornisci();
+            Thread.sleep(10000);
+
+            rifornisci();
+            Thread.sleep(10000);
+
+            rifornisci();
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
+        
             e.printStackTrace();
         }
+        System.out.println("muoro");
     }
 
     private void rifornisci() {

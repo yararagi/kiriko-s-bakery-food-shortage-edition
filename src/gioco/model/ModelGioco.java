@@ -9,28 +9,32 @@ public class ModelGioco {
     private Quest quest;
     private short nLivello;
     private ArrayList<Consumer> consumers;
-    private Semaphore accessiAltriConsumatori;
+    private MyGate lock; 
 
-    public ModelGioco(){
+    public ModelGioco(MyGate lock){
         nLivello=1;
         bancone= new Bancone();
         quest= new Quest(nLivello);
         kiriko= new Kiriko(quest, bancone);
-        accessiAltriConsumatori= new Semaphore(3);
         consumers= new ArrayList<>();
-        for(byte i=0; i<5;i++){
-            consumers.add(new Consumer(bancone, accessiAltriConsumatori));
+        this.lock= lock;
+        for(byte i=0; i<3;i++){
+            consumers.add(new Consumer(bancone, lock));
         }
     }
 
-    public void prossimoLivello(){
+    public void startProssimoLivello(){
+        kiriko.start();
+    }
+    public void preparaProssimoLivello(){
+        nLivello+=1;
         quest= new Quest((short)(nLivello+1));
-        //kiriko.start();
+        kiriko= new Kiriko(quest, bancone);
     }
 
-    public void start() {
+    public void startPartita() {
         kiriko.start();
-        for(byte i=0; i<5;i++){
+        for(byte i=0; i<3;i++){
             consumers.get(i).start();
         }
     }
@@ -56,13 +60,8 @@ public class ModelGioco {
         return bancone.getNumBriocheDisponinbili();
     }
 
-    public int drainPermits() {
-        return accessiAltriConsumatori.drainPermits();
+    public MyGate getIntermezzoLock() {
+        return lock;
     }
-
-    public void release() {
-        accessiAltriConsumatori.release(5);
-    }
-
     
 }

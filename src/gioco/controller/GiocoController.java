@@ -13,6 +13,7 @@ import com.raylib.java.core.input.Mouse.MouseButton;
 
 import gioco.model.Giocatore;
 import gioco.model.ModelGioco;
+import gioco.model.MyGate;
 import gioco.model.RisultatiGiocatori;
 import gioco.model.StatoPartita;
 import gioco.model.TipoPane;
@@ -28,6 +29,7 @@ public class GiocoController {
     private ModelGioco model;
     private PartitaView partitaView;
     private Timer timerRound;
+    private MyGate intermezzoLock;
 
     public GiocoController(SalvaView salvaView, PartitaView partitaView, RisultatiGiocatori risultatiGiocatori, ModelGioco model){
         this.salvaView= salvaView;
@@ -35,6 +37,7 @@ public class GiocoController {
         this.model= model;
         this.partitaView= partitaView;
         this.timerRound= new Timer();
+        this.intermezzoLock= model.getIntermezzoLock();
     }
 
 //-------------------------TEST SALVATAGGIO DATI-------------------------
@@ -68,22 +71,21 @@ public class GiocoController {
         }
     }
 
+    private double tempoInizio=0;
     private void gioca(){
-        
         statoPartita= StatoPartita.GIOCANDO;
-        model.start();
+        model.startPartita();
         timerRound.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
                     if(model.isQuestCompleted()==false){
                         statoPartita= StatoPartita.SALVA;
                     }else{
-                        model.drainPermits();
-                        model.prossimoLivello();
-                        System.out.println("ai vint");
-                        //intermezzo livello
+                        tempoInizio= rCore.GetTime();
+                        model.preparaProssimoLivello();
+                        intermezzoLock.lockAndWait();
+                        model.startProssimoLivello(); 
                     }
-                System.out.println("oosos");
                 }
                 
             }, 30000, 30000);
@@ -106,7 +108,12 @@ public class GiocoController {
            
             partitaView.paintCeste();
 
-            
+            if(intermezzoLock.isLocked()){
+                raylib.text.DrawFPS(500, 500);
+                if(((int)(rCore.GetTime()-tempoInizio))>=10){
+                    intermezzoLock.unlock();
+                } 
+            }
 
             raylib.core.EndDrawing();
         }
