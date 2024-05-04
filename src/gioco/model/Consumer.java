@@ -1,6 +1,9 @@
 package gioco.model;
 
+import static main.Main.statoApp;
+
 import gioco.controller.GiocoController;
+import menu.model.Stato;
 
 public class Consumer extends Thread {
     private Bancone bancone;
@@ -14,7 +17,7 @@ public class Consumer extends Thread {
     @Override
     public void run() {
         try {
-            while(GiocoController.statoPartita.equals(StatoPartita.GIOCANDO)){
+            while(GiocoController.statoPartita==StatoPartita.GIOCANDO && statoApp!= Stato.ESCI){
                 Thread.sleep((long)((Math.random()*2500)+500)); //per non farli accedere tutti assieme bph
                 lock.tryToPassThrough();
                 switch((int)(Math.random()*3)){

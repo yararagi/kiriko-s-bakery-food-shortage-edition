@@ -1,5 +1,6 @@
 package main;
- 
+
+
 import com.raylib.java.Raylib;
 
 import gioco.controller.GiocoController;
@@ -14,22 +15,39 @@ import menu.view.MenuView;
 import menu.view.RisultatiView;
 
 public class Main {
-    public static Stato statoApp= Stato.MENU; 
+    public volatile static Stato statoApp= Stato.MENU; 
     public static Raylib raylib= new Raylib(1920,1080,"kiriko's bakery: food shortage");
-   
-    public static void main(String[] args) {
-        
+    MenuController menuController;
+    GiocoController giocoController;
+    RisultatiGiocatori risultatiGiocatori;
+
+    Main (){
         raylib.core.MaximizeWindow();
-        raylib.core.SetWindowState(0x00000002);
         raylib.core.SetTargetFPS(60);
 
-        RisultatiGiocatori risultatiGiocatori= new RisultatiGiocatori();
+        risultatiGiocatori= new RisultatiGiocatori();
         
-        MenuController menuController= new MenuController(new MenuView(), new RisultatiView(), risultatiGiocatori);
-        GiocoController giocoController= new GiocoController(new SalvaView(),new PartitaView(), risultatiGiocatori, new ModelGioco(new MyGate()));
+        menuController= new MenuController(new MenuView(), new RisultatiView(), risultatiGiocatori);
+        giocoController= new GiocoController(new SalvaView(),new PartitaView(), risultatiGiocatori, new ModelGioco(new MyGate()));
 
+        raylib.core.SetExitKey(0);
+        new Thread(new Runnable() {
+            public synchronized void run() {
+                while (statoApp!=Stato.ESCI) {
+                    //System.out.println("s");
+                    if(raylib.core.WindowShouldClose()){
+                        statoApp=Stato.ESCI;
+                        System.out.println("caaaaaaaaaaaaa");
+                        
+                    }
+                }
+            };
+        }).start();
+        
+    }
+
+    public void start(){
         while (statoApp!=Stato.ESCI) {
-            //--------------------TEST---------------------
             switch(statoApp){
                 case MENU:
                     menuController.run(); 
@@ -43,11 +61,19 @@ public class Main {
                     statoApp= Stato.MENU;
                     break;
             }
-            //---------------------------------------------
-                
         }
+    }
 
-        risultatiGiocatori.salvaRisultati();
-        menuController.runUnload();
+    private void esci(){
+            risultatiGiocatori.salvaRisultati();
+            menuController.runUnload();
+            raylib.core.CloseWindow();
+            System.exit(0);
+    }
+
+    public static void main(String[] args) {
+        Main app= new Main();
+        app.start();
+        app.esci();
     }
 }

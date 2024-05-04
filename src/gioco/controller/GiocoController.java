@@ -56,7 +56,7 @@ public class GiocoController {
 
      public void run() {
         statoPartita=StatoPartita.GIOCANDO;
-        while (statoApp == Stato.GIOCA ){
+        while (statoApp == Stato.GIOCA){
             switch (statoPartita) {
                 case GIOCANDO:
                     gioca();
@@ -94,7 +94,7 @@ public class GiocoController {
                 
             }, 30000, 30000);
             
-        while (statoPartita == StatoPartita.GIOCANDO) {
+        while (statoPartita == StatoPartita.GIOCANDO && statoApp!= Stato.ESCI) {
             raylib.core.BeginDrawing();
             raylib.core.ClearBackground(Color.BLACK);
             
@@ -132,7 +132,7 @@ public class GiocoController {
     }
 
     private void intermezzo(){
-        while (statoPartita == StatoPartita.INTERMEZZO) {
+        while (statoPartita == StatoPartita.INTERMEZZO && statoApp!= Stato.ESCI) {
             raylib.core.BeginDrawing();
             raylib.core.ClearBackground(Color.BLACK);
             raylib.text.DrawFPS(500, 500);
@@ -152,7 +152,7 @@ public class GiocoController {
         byte nLettere=0;
         boolean indietro=true;
 
-        while(statoPartita == StatoPartita.SALVA){
+        while(statoPartita == StatoPartita.SALVA && statoApp!= Stato.ESCI){
 
             salvaView.paintFinestraSalvataggio(String.copyValueOf(nome));
             key= raylib.core.GetCharPressed();

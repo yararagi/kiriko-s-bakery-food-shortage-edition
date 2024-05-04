@@ -48,10 +48,18 @@ public class MenuController {
             if(raylib.core.IsKeyPressed(Keyboard.KEY_ENTER)){
                 switch (scelta) {
                     case 0:
-                        statoApp=Stato.GIOCA;
+                        synchronized(this){
+                            if(statoApp!=Stato.ESCI){
+                                statoApp=Stato.GIOCA;
+                            }
+                        }
                         break;
                     case 1:
-                        statoApp=Stato.RISULTATI;
+                        synchronized(this){
+                            if(statoApp!=Stato.ESCI){
+                                statoApp=Stato.RISULTATI;
+                            }
+                        }
                         runRisultati();
                         break;
                     case 2:
@@ -65,13 +73,21 @@ public class MenuController {
             if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), view.getVociMenuBtn()[0])){
                 scelta=0;
                 if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
-                    statoApp=Stato.GIOCA;
+                    synchronized(this){
+                        if(statoApp!=Stato.ESCI){
+                            statoApp=Stato.GIOCA;
+                        }
+                    }
                 }
             }
             if(raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), view.getVociMenuBtn()[1])){
                 scelta=1;
                 if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
-                    statoApp=Stato.RISULTATI;
+                    synchronized(this){
+                        if(statoApp!=Stato.ESCI){
+                            statoApp=Stato.RISULTATI;
+                        }
+                    }
                     runRisultati();
                 }
             }
@@ -100,8 +116,10 @@ public class MenuController {
             if(raylib.core.IsKeyPressed(Keyboard.KEY_UP) && indexToShow>0){
                 indexToShow--;
             }
-            if(raylib.core.IsKeyPressed(Keyboard.KEY_ENTER)){
-                statoApp=Stato.MENU;
+            synchronized(this){
+                if(raylib.core.IsKeyPressed(Keyboard.KEY_ENTER) && statoApp!= Stato.ESCI){
+                    statoApp=Stato.MENU;
+                }
             }
             if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)&&raylib.shapes.CheckCollisionPointTriangle(rCore.GetMousePosition(), rView.getTriangoloScrollDown()[0],rView.getTriangoloScrollDown()[1], rView.getTriangoloScrollDown()[2]) && indexToShow+howManyToShow< risultatiGiocatori.getListaGiocatori().size()){
                 indexToShow++;
@@ -109,8 +127,10 @@ public class MenuController {
             if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)&&raylib.shapes.CheckCollisionPointTriangle(rCore.GetMousePosition(), rView.getTriangoloScrollUp()[0],rView.getTriangoloScrollUp()[1], rView.getTriangoloScrollUp()[2]) && indexToShow>0){
                 indexToShow--;
             }
-            if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)&&raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), rView.getBackBtn())){
-                statoApp=Stato.MENU;
+            synchronized(this){
+                if(raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)&&raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), rView.getBackBtn())&& statoApp!= Stato.ESCI){
+                    statoApp=Stato.MENU;
+                }
             }
             
         }

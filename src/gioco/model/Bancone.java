@@ -48,13 +48,13 @@ public class Bancone {
         return briocheDisponinbili.size();
     }
 
-    public synchronized void addBrioche(Pane brioche){
+    public void addBrioche(Pane brioche){
         briocheDisponinbili.add(brioche);
     }  
-    public synchronized void addDonut(Pane donut){
+    public void addDonut(Pane donut){
         donutDisponinbili.add(donut);
     }
-    public synchronized void addBaguette(Pane baguette){
+    public void addBaguette(Pane baguette){
         baguetteDisponinbili.add(baguette);
     }
 
