@@ -1,6 +1,11 @@
 package main;
 
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.lwjgl.glfw.GLFW;
+
 import com.raylib.java.Raylib;
 
 import gioco.controller.GiocoController;
@@ -22,7 +27,9 @@ public class Main {
     RisultatiGiocatori risultatiGiocatori;
 
     Main (){
-        raylib.core.MaximizeWindow();
+        //raylib.core.MaximizeWindow();
+        raylib.core.SetWindowState(0x00000002);
+        raylib.core.SetWindowState(0x00000100);
         raylib.core.SetTargetFPS(60);
 
         risultatiGiocatori= new RisultatiGiocatori();
@@ -31,18 +38,17 @@ public class Main {
         giocoController= new GiocoController(new SalvaView(),new PartitaView(), risultatiGiocatori, new ModelGioco(new MyGate()));
 
         raylib.core.SetExitKey(0);
-        new Thread(new Runnable() {
-            public synchronized void run() {
-                while (statoApp!=Stato.ESCI) {
-                    //System.out.println("s");
-                    if(raylib.core.WindowShouldClose()){
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    if(statoApp!=Stato.ESCI && raylib.core.WindowShouldClose()){
                         statoApp=Stato.ESCI;
                         System.out.println("caaaaaaaaaaaaa");
-                        
                     }
-                }
-            };
-        }).start();
+                };
+    
+                
+            }, 1, 1);
         
     }
 
@@ -65,10 +71,11 @@ public class Main {
     }
 
     private void esci(){
-            risultatiGiocatori.salvaRisultati();
-            menuController.runUnload();
-            raylib.core.CloseWindow();
-            System.exit(0);
+        risultatiGiocatori.salvaRisultati();
+        menuController.runUnload();
+        raylib.core.CloseWindow();
+        System.out.println("eeee");
+        System.exit(0);
     }
 
     public static void main(String[] args) {

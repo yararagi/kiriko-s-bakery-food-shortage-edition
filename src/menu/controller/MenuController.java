@@ -29,7 +29,7 @@ public class MenuController {
     public void run() {
         while(statoApp==Stato.MENU){
             view.paintMenu(scelta);
-
+            
             if(raylib.core.IsKeyPressed(Keyboard.KEY_DOWN)){
                 if(scelta>=view.getnScritte()-1){
                     scelta=0;
