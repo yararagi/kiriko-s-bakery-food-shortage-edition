@@ -6,7 +6,6 @@ import static main.Main.statoApp;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.raylib.java.core.Color;
 import com.raylib.java.core.rCore;
 import com.raylib.java.core.input.Keyboard;
 import com.raylib.java.core.input.Mouse.MouseButton;

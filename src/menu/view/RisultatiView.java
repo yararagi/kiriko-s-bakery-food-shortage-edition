@@ -10,6 +10,8 @@ import com.raylib.java.raymath.Vector2;
 import com.raylib.java.shapes.Rectangle;
 import com.raylib.java.text.Font;
 import com.raylib.java.text.rText;
+import com.raylib.java.textures.Texture2D;
+import com.raylib.java.textures.rTextures;
 
 import gioco.model.Giocatore;
 
@@ -19,11 +21,13 @@ public class RisultatiView {
     private byte offsetScritte;
     private int screenX;
     private Vector2 back;
+    Texture2D background;
     private Rectangle backBtn;
     private Vector2[] triangoloScrollUp;
     private Vector2[] triangoloScrollDown;
 
     public RisultatiView(){
+        background= rTextures.LoadTexture("texture/background/sharpen_city-town-pixel-artwork-aesthetic-blur-1600x900-wallpx.com.jpg");
         fontSize = 40;
         fontRegular = raylib.text.LoadFontEx("font/MagicBreadRegular.ttf",fontSize,null,0);
         screenX=rCore.GetScreenWidth();
@@ -42,7 +46,6 @@ public class RisultatiView {
         }else{
             raylib.text.DrawTextEx(fontRegular, "nessun punteggio", new Vector2(((screenX/2) - (rText.MeasureTextEx(fontRegular,"nessun punteggio", 45,0).getX()/2)), rCore.GetScreenHeight()/2 ), 45, 0, Color.RAYWHITE);
         }
-        raylib.shapes.DrawRectangleLines((screenX/2)-350, 75, 700, 725, Color.RAYWHITE);
     }
     private void paintScrollGuide(boolean up, boolean down){
         if(up){
@@ -53,6 +56,12 @@ public class RisultatiView {
         }
     }
 
+    private void drawBackgorund(){
+        raylib.textures.DrawTextureEx(background, new Vector2(0, 0), 0, 1.2f, Color.WHITE);
+        raylib.shapes.DrawRectangleLines((screenX/2)-350, 75, 700, 725, Color.RAYWHITE);
+        raylib.shapes.DrawRectangle((screenX/2)-350, 75, 700, 725, new Color(153, 40, 32, 75));
+    }
+
     private void paintBack() {
         raylib.text.DrawTextEx(fontRegular, "indietro", back, fontSize+15, 0, (raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), backBtn)?(Color.WHITE):(new Color(164, 22, 26, 150)) ));
     }
@@ -60,6 +69,7 @@ public class RisultatiView {
     public void paintSchermataRisultati(List<Giocatore> lista, boolean up, boolean down){
         raylib.core.BeginDrawing();
         raylib.core.ClearBackground(Color.BLACK);
+        drawBackgorund();
         this.paintRisultati(lista);
         this.paintScrollGuide(up, down);
         this.paintBack();
