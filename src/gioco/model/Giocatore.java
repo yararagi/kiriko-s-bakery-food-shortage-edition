@@ -13,12 +13,12 @@ public class Giocatore implements Serializable {
     }
     @Override
     public String toString() {
-        return "Giocatore [score=" + score + ", nome=" + nome + "]";
+        return "Giocatore [punteggio=" + score + ", nome=" + nome + "]";
     }
-    public int getScore() {
+    public int getScore() {     
         return score;
     }
-    public void setScore(int score) {
+    public void setScore(short score) {
         this.score = score;
     }
     public String getNome() {

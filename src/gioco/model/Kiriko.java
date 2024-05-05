@@ -45,8 +45,8 @@ public class Kiriko extends Thread{
     private void rifornisci() {
         short i;
         for(i=0; i<(quest.getBaguetteRichieste()/3)+(Math.random()*6)+3;i++)    bancone.addBaguette(new Pane(TipoPane.BAGUETTE));
-        for(i=0; i<(quest.getDonutRichieste()/3)+(Math.random()*6)+3;i++)     bancone.addDonut(new Pane(TipoPane.DONUT));
-        for(i=0; i<(quest.getBriocheRichieste()/3)+(Math.random()*6)+3;i++)     bancone.addBrioche(new Pane(TipoPane.BRIOCHE));
+        for(i=0; i<(quest.getDonutRichieste()/3)+(Math.random()*3)+1;i++)     bancone.addDonut(new Pane(TipoPane.DONUT));
+        for(i=0; i<(quest.getBriocheRichieste()/3)+(Math.random()*4)+2;i++)     bancone.addBrioche(new Pane(TipoPane.BRIOCHE));
     }
 
     public byte getStagePartita() {

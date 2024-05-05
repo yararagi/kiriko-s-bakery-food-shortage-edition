@@ -30,6 +30,7 @@ public class GiocoController {
     private Timer timerRound;
     private MyGate intermezzoLock;
     private double tempoInizio;
+    private int punteggio;
 
     public GiocoController(SalvaView salvaView, PartitaView partitaView, RisultatiGiocatori risultatiGiocatori, ModelGioco model){
         this.salvaView= salvaView;
@@ -39,13 +40,24 @@ public class GiocoController {
         this.timerRound= new Timer();
         this.intermezzoLock= model.getIntermezzoLock();
         tempoInizio=0;
+        punteggio=0;
     }
 
 //-------------------------TEST SALVATAGGIO DATI-------------------------
     public static void main(String[] args) {
          RisultatiGiocatori g=new RisultatiGiocatori();
-         
-         
+         g.add(new Giocatore(45, "g1"));
+         g.add(new Giocatore(452, "g2"));
+         g.add(new Giocatore(445, "g3"));
+         g.add(new Giocatore(25, "g4"));
+         g.add(new Giocatore(545, "g5"));
+         g.add(new Giocatore(435, "g6"));
+         g.add(new Giocatore(90, "g8"));
+         g.add(new Giocatore(45, "g7"));
+         g.add(new Giocatore(45, "91"));
+         g.add(new Giocatore(45, "g1"));
+         g.add(new Giocatore(45, "g1"));
+
          g.salvaRisultati();
          //g.recuperaRisultati();
          
@@ -61,7 +73,8 @@ public class GiocoController {
                     gioca();
                     break;
                 case SALVA:
-                    salva(model.getPunteggio());
+                    salva(punteggio);
+                    punteggio=0;
                     break;
                 case TORNAALMENU:
                     statoApp= Stato.MENU;
@@ -79,13 +92,15 @@ public class GiocoController {
     private void gioca(){
         model.startPartita();
 
-        timerRound.scheduleAtFixedRate(new TimerTask() {
+        timerRound.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     System.out.println("check win "+rCore.GetTime());
                     if(model.isQuestCompleted()==false){
+                        punteggio=model.getPunteggio();
                         model=new ModelGioco(intermezzoLock); 
                         statoPartita= StatoPartita.SALVA;
+                        timerRound.cancel();
                     }else{
                         tempoInizio= rCore.GetTime();
                         model.preparaProssimoLivello();
@@ -93,7 +108,7 @@ public class GiocoController {
                     }
                 }
                 
-            }, 30000, 30000);
+            }, 30000, 40000);
             
         while (statoPartita == StatoPartita.GIOCANDO && statoApp!= Stato.ESCI) {
             synchronized(this){
@@ -110,18 +125,21 @@ public class GiocoController {
                 if(model.prendiPane(TipoPane.BRIOCHE)){
                     model.presoPane(TipoPane.BRIOCHE);
                     model.addPunti(Pane.BRIOCHE_VALUE);
+                    System.out.println(model.getPunteggio());
                 }
             }
             if(didPlayerTakeDonut() == true){
                 if(model.prendiPane(TipoPane.DONUT)){
                     model.presoPane(TipoPane.DONUT);
                     model.addPunti(Pane.DONUT_VALUE);
+                    System.out.println(model.getPunteggio());
                 }
             }
             if(didPlayerTakeBaguette() == true){
                 if(model.prendiPane(TipoPane.BAGUETTE)){
                     model.presoPane(TipoPane.BAGUETTE);
                     model.addPunti(Pane.BAGUETTE_VALUE);
+                    System.out.println(model.getPunteggio());
                 }
             }
            
@@ -153,7 +171,7 @@ public class GiocoController {
         }
     }
     
-    private void salva(short punteggio){
+    private void salva(int punteggio){
         final byte MAX_INPUT_CHARS=14;
         char[] nome= new char[]{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
         int key, contaFrame=0;
@@ -194,6 +212,7 @@ public class GiocoController {
                     nome[nLettere]=' ';
                 }
                 if(!String.copyValueOf(nome).replaceAll(" +", "").equals("")){
+                    System.out.println(model.getPunteggio());
                     risultatiGiocatori.add(new Giocatore(punteggio, String.copyValueOf(nome).trim().replaceAll(" +", " ")));
                     statoPartita= StatoPartita.TORNAALMENU;
                 }

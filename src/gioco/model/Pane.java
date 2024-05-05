@@ -1,7 +1,9 @@
 package gioco.model;
 
 public class Pane {
+    @SuppressWarnings("unused")
     private byte puntiPane;
+    @SuppressWarnings("unused")
     private TipoPane tipoPane;
     public static final byte BRIOCHE_VALUE=15;
     public static final byte BAGUETTE_VALUE=5;
