@@ -4,9 +4,8 @@ package main;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.lwjgl.glfw.GLFW;
-
 import com.raylib.java.Raylib;
+import com.raylib.java.core.rCore;
 
 import gioco.controller.GiocoController;
 import gioco.model.ModelGioco;
@@ -27,7 +26,8 @@ public class Main {
     RisultatiGiocatori risultatiGiocatori;
 
     Main (){
-        //raylib.core.MaximizeWindow();
+        rCore.SetConfigFlags(0x00000040);
+        raylib.core.MaximizeWindow();
         raylib.core.SetWindowState(0x00000002);
         raylib.core.SetWindowState(0x00000100);
         raylib.core.SetTargetFPS(60);
@@ -43,11 +43,8 @@ public class Main {
                 public void run() {
                     if(statoApp!=Stato.ESCI && raylib.core.WindowShouldClose()){
                         statoApp=Stato.ESCI;
-                        System.out.println("caaaaaaaaaaaaa");
                     }
-                };
-    
-                
+                };                
             }, 1, 1);
         
     }
@@ -74,7 +71,6 @@ public class Main {
         risultatiGiocatori.salvaRisultati();
         menuController.runUnload();
         raylib.core.CloseWindow();
-        System.out.println("eeee");
         System.exit(0);
     }
 
