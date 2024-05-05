@@ -13,6 +13,7 @@ import com.raylib.java.core.input.Mouse.MouseButton;
 import gioco.model.Giocatore;
 import gioco.model.ModelGioco;
 import gioco.model.MyGate;
+import gioco.model.Pane;
 import gioco.model.RisultatiGiocatori;
 import gioco.model.StatoPartita;
 import gioco.model.TipoPane;
@@ -24,7 +25,6 @@ public class GiocoController {
     public static StatoPartita statoPartita=StatoPartita.GIOCANDO;
     private SalvaView salvaView;
     private RisultatiGiocatori risultatiGiocatori;
-    private short punteggio;
     private ModelGioco model;
     private PartitaView partitaView;
     private Timer timerRound;
@@ -61,7 +61,7 @@ public class GiocoController {
                     gioca();
                     break;
                 case SALVA:
-                    salva(punteggio);
+                    salva(model.getPunteggio());
                     break;
                 case TORNAALMENU:
                     statoApp= Stato.MENU;
@@ -109,20 +109,20 @@ public class GiocoController {
             if(didPlayerTakeBrioche() == true){
                 if(model.prendiPane(TipoPane.BRIOCHE)){
                     model.presoPane(TipoPane.BRIOCHE);
-                } 
-                System.out.println("player ha preso brioche, rimaste:"+model.getNumBriocheDisponinbili());
+                    model.addPunti(Pane.BRIOCHE_VALUE);
+                }
             }
             if(didPlayerTakeDonut() == true){
                 if(model.prendiPane(TipoPane.DONUT)){
                     model.presoPane(TipoPane.DONUT);
+                    model.addPunti(Pane.DONUT_VALUE);
                 }
-                System.out.println("player ha preso donut, rimaste:"+model.getNumDonutDisponinbili());
             }
             if(didPlayerTakeBaguette() == true){
                 if(model.prendiPane(TipoPane.BAGUETTE)){
                     model.presoPane(TipoPane.BAGUETTE);
+                    model.addPunti(Pane.BAGUETTE_VALUE);
                 }
-                System.out.println("player ha preso baguette, rimaste:"+model.getNumBaguetteDisponinbili());
             }
            
             partitaView.paintPartita();

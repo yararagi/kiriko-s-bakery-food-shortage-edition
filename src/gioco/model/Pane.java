@@ -1,34 +1,30 @@
 package gioco.model;
 
-import com.raylib.java.shapes.Rectangle;
-import com.raylib.java.textures.Texture2D;
-
 public class Pane {
     private byte puntiPane;
-    private Rectangle corpoPane;
-    private Texture2D texturePane;
     private TipoPane tipoPane;
+    public static final byte BRIOCHE_VALUE=15;
+    public static final byte BAGUETTE_VALUE=5;
+    public static final byte DONUT_VALUE=50;
     
     public Pane(TipoPane tipoPane) {
         this.tipoPane = tipoPane;
         switch (tipoPane) {
             case BAGUETTE:
-                puntiPane=5;
+                puntiPane=BAGUETTE_VALUE;
 
                 break;
             case BRIOCHE:
-                puntiPane=15;
+                puntiPane=BRIOCHE_VALUE;
 
                 break;
             case DONUT:
-                puntiPane=50;
+                puntiPane=DONUT_VALUE;
 
                 break;
             default:
                 break;
         }
     }
-
-    
 
 }

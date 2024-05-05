@@ -10,8 +10,10 @@ public class ModelGioco {
     private short nLivello;
     private ArrayList<Consumer> consumers;
     private MyGate lock; 
+    private byte punteggio;
 
     public ModelGioco(MyGate lock){
+        punteggio=0;
         nLivello=1;
         bancone= new Bancone();
         quest= new Quest(nLivello);
@@ -84,5 +86,11 @@ public class ModelGioco {
         quest.presoPane(tipoPane);
     }
 
+    public byte getPunteggio() {
+        return punteggio;
+    }
+    public void addPunti(byte punti) {
+        this.punteggio+=punti;
+    }
     
 }
