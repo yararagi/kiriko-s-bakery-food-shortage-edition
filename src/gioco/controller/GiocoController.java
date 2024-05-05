@@ -95,9 +95,7 @@ public class GiocoController {
             }, 30000, 30000);
             
         while (statoPartita == StatoPartita.GIOCANDO && statoApp!= Stato.ESCI) {
-            raylib.core.BeginDrawing();
-            raylib.core.ClearBackground(Color.BLACK);
-            
+
             if(didPlayerTakeBrioche() == true){
                 model.prendiPane(TipoPane.BRIOCHE); 
                 System.out.println("player ha preso brioche, rimaste:"+model.getNumBriocheDisponinbili());
@@ -111,13 +109,11 @@ public class GiocoController {
                 System.out.println("player ha preso baguette, rimaste:"+model.getNumBaguetteDisponinbili());
             }
            
-            partitaView.paintCeste();
+            partitaView.paintPartita();
 
             if(intermezzoLock.isLocked()){
                 statoPartita= StatoPartita.INTERMEZZO;
             }
-
-            raylib.core.EndDrawing();
         }
     }
 
@@ -133,15 +129,11 @@ public class GiocoController {
 
     private void intermezzo(){
         while (statoPartita == StatoPartita.INTERMEZZO && statoApp!= Stato.ESCI) {
-            raylib.core.BeginDrawing();
-            raylib.core.ClearBackground(Color.BLACK);
-            raylib.text.DrawFPS(500, 500);
-            System.out.print("c");
+            partitaView.paintIntermezzo();
             if(((int)(rCore.GetTime()-tempoInizio))>=10){
                 statoPartita=StatoPartita.GIOCANDO;
                 intermezzoLock.unlock();
             } 
-            raylib.core.EndDrawing();
         }
     }
     
