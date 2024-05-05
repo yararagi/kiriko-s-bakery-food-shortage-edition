@@ -18,7 +18,7 @@ public class Consumer extends Thread {
     public void run() {
         try {
             while(GiocoController.statoPartita==StatoPartita.GIOCANDO && statoApp!= Stato.ESCI){
-                Thread.sleep((long)((Math.random()*2500)+500)); //per non farli accedere tutti assieme bph
+                Thread.sleep((long)((Math.random()*2500)+750)); //per non farli accedere tutti assieme bph
                 lock.tryToPassThrough();
                 switch((int)(Math.random()*3)){
                     case 0:
