@@ -69,6 +69,7 @@ public class Main {
 
     private void esci(){
         risultatiGiocatori.salvaRisultati();
+        giocoController.unload();
         menuController.runUnload();
         raylib.core.CloseWindow();
         System.exit(0);

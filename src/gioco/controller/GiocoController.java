@@ -82,7 +82,9 @@ public class GiocoController {
         timerRound.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
+                    System.out.println("check win "+rCore.GetTime());
                     if(model.isQuestCompleted()==false){
+                        model=new ModelGioco(intermezzoLock); 
                         statoPartita= StatoPartita.SALVA;
                     }else{
                         tempoInizio= rCore.GetTime();
@@ -94,17 +96,32 @@ public class GiocoController {
             }, 30000, 30000);
             
         while (statoPartita == StatoPartita.GIOCANDO && statoApp!= Stato.ESCI) {
+            synchronized(this){
+                partitaView.setCestaBriocheEmptiness((model.getNumBriocheDisponinbili()==0)?true:false);         
+                partitaView.setCestaBaguetteEmptiness((model.getNumBaguetteDisponinbili()==0)?true:false);         
+                partitaView.setCestaDonutEmptiness((model.getNumDonutDisponinbili()==0)?true:false); 
+                partitaView.setStagePartitaStage(model.getStagePartita()); 
+                partitaView.setnBaguette(model.getBaguetteRichieste());
+                partitaView.setnBrioche(model.getBriocheRichieste());
+                partitaView.setnDonut(model.getDonutRichieste());
+            }
 
             if(didPlayerTakeBrioche() == true){
-                model.prendiPane(TipoPane.BRIOCHE); 
+                if(model.prendiPane(TipoPane.BRIOCHE)){
+                    model.presoPane(TipoPane.BRIOCHE);
+                } 
                 System.out.println("player ha preso brioche, rimaste:"+model.getNumBriocheDisponinbili());
             }
             if(didPlayerTakeDonut() == true){
-                model.prendiPane(TipoPane.DONUT);
+                if(model.prendiPane(TipoPane.DONUT)){
+                    model.presoPane(TipoPane.DONUT);
+                }
                 System.out.println("player ha preso donut, rimaste:"+model.getNumDonutDisponinbili());
             }
             if(didPlayerTakeBaguette() == true){
-                model.prendiPane(TipoPane.BAGUETTE);
+                if(model.prendiPane(TipoPane.BAGUETTE)){
+                    model.presoPane(TipoPane.BAGUETTE);
+                }
                 System.out.println("player ha preso baguette, rimaste:"+model.getNumBaguetteDisponinbili());
             }
            
@@ -190,7 +207,11 @@ public class GiocoController {
             }
 
         }
-     }
+    }
 
+    public void unload(){
+        partitaView.unload();
+        salvaView.unload();
+    }
   
 }

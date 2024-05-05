@@ -41,7 +41,6 @@ public class ModelGioco {
     }
 
     public boolean prendiPane(TipoPane tipo) {
-        quest.presoPane(tipo);
         return bancone.prendiPane(tipo);
     }
 
@@ -64,5 +63,26 @@ public class ModelGioco {
     public MyGate getIntermezzoLock() {
         return lock;
     }
+    
+    public byte getStagePartita(){
+        return kiriko.getStagePartita();
+    }
+
+    public int getBriocheRichieste() {
+        return quest.getBriocheRichieste();
+    }
+
+    public int getBaguetteRichieste() {
+        return quest.getBaguetteRichieste();
+    }
+
+    public int getDonutRichieste() {
+        return quest.getDonutRichieste();
+    }
+
+    public void presoPane(TipoPane tipoPane) {
+        quest.presoPane(tipoPane);
+    }
+
     
 }

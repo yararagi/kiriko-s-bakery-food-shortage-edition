@@ -54,4 +54,7 @@ public class SalvaView {
     
     }
 
+    public void unload(){
+        rText.UnloadFont(fontRegular);
+    }
 }
