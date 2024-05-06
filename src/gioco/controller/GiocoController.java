@@ -108,7 +108,7 @@ public class GiocoController {
                     }
                 }
                 
-            }, 30000, 40000);
+            }, 30000);
             
         while (statoPartita == StatoPartita.GIOCANDO && statoApp!= Stato.ESCI) {
             synchronized(this){
