@@ -4,20 +4,23 @@ package gioco.view;
 import static main.Main.raylib;
 
 import com.raylib.java.core.Color;
+import com.raylib.java.core.rCore;
 import com.raylib.java.raymath.Vector2;
 import com.raylib.java.shapes.Rectangle;
 import com.raylib.java.shapes.rShapes;
 import com.raylib.java.text.Font;
+import com.raylib.java.text.rText;
 import com.raylib.java.textures.Texture2D;
 import com.raylib.java.textures.rTextures;
 
 public class PartitaView {
     private Rectangle cestaBrioche, cestaDonut, cestaBaguette, stagePartitaSrc, stagePartitaDest;
-    private Texture2D stagePartitaSprite, banconeTexture, vetroTexture, backgrounTexture, cestaBriocheTexture[], cestaDonutTexture[], cestaBaguetteTexture[], baguette, brioche, donut ;
+    private Texture2D cartelloQuestTexture,stagePartitaSprite, banconeTexture, vetroTexture, backgrounTexture, cestaBriocheTexture[], cestaDonutTexture[], cestaBaguetteTexture[], baguette, brioche, donut ;
     private byte cestaBaguetteStatus, cestaDonutStatus, cestaBriocheStatus, fontsize;
     private int nBrioche, nBaguette, nDonut;
-    private Vector2 cestaBriochePos, cestaBaguettePos, cestaDonutPos, pos00, posLegendaBaguette, posLegendaBrioche, posLegendaDonut, posLegendaScrittaBrioche, posLegendaScrittaBaguette, posLegendaScrittaDonut ;
+    private Vector2 posCartelloIntervallo, posScrittaQuest, poscartelloQuest, cestaBriochePos, cestaBaguettePos, cestaDonutPos, pos00, posLegendaBaguette, posLegendaBrioche, posLegendaDonut, posLegendaScrittaBrioche, posLegendaScrittaBaguette, posLegendaScrittaDonut ;
     private Font font;
+    private float halfScreenWidth=rCore.GetScreenWidth()*0.5f, halfScreenHeight= rCore.GetScreenHeight()*0.5f;
     
 
     public PartitaView(){
@@ -54,12 +57,16 @@ public class PartitaView {
         donut= rTextures.LoadTexture("texture/background/gioco/asset_mission/dunat.png");
         brioche= rTextures.LoadTexture("texture/background/gioco/asset_mission/brioche.png");
         baguette= rTextures.LoadTexture("texture/background/gioco/asset_mission/baguet.png");
-        posLegendaDonut=new Vector2(30, 40);
-        posLegendaScrittaDonut=new Vector2(100, 50);
-        posLegendaBrioche=new Vector2(30, 90);
-        posLegendaScrittaBrioche=new Vector2(100, 100);
-        posLegendaBaguette=new Vector2(30, 140);
-        posLegendaScrittaBaguette=new Vector2(100, 150);
+        posLegendaDonut=new Vector2(halfScreenWidth-75, 40);
+        posLegendaBrioche=new Vector2(halfScreenWidth-75, 85);
+        posLegendaBaguette=new Vector2(halfScreenWidth-75, 135);
+        posLegendaScrittaDonut=new Vector2(halfScreenWidth+10, 55);
+        posLegendaScrittaBrioche=new Vector2(halfScreenWidth+10, 105);
+        posLegendaScrittaBaguette=new Vector2(halfScreenWidth+10, 150);
+        cartelloQuestTexture=rTextures.LoadTexture("texture/background/gioco/asset_mission/cartello.png");
+        poscartelloQuest=new Vector2(halfScreenWidth-25*5, 0);
+        posScrittaQuest= new Vector2(halfScreenWidth-(rText.MeasureTextEx(font, "Quest:", fontsize+5, 2).getX()*0.5f), 15);
+        posCartelloIntervallo= new Vector2(halfScreenWidth-25*20f, halfScreenHeight-20f*20);
     }
 
     public void paintCeste(){
@@ -80,7 +87,7 @@ public class PartitaView {
         raylib.core.EndDrawing();
     }
 
-    public void paintIntermezzo(){
+    public void paintIntermezzo(int puntiTotalizzati){
         raylib.core.BeginDrawing();
         raylib.core.ClearBackground(Color.BLACK);
         
@@ -88,7 +95,12 @@ public class PartitaView {
         painBancone();
         setStagePartitaStage((byte)0);
         rTextures.DrawTexturePro(stagePartitaSprite, stagePartitaSrc, stagePartitaDest, pos00, 0, Color.WHITE);
-        
+        raylib.textures.DrawTextureEx(cartelloQuestTexture, posCartelloIntervallo, 0, 20f, Color.WHITE);
+        raylib.text.DrawTextEx(font, "Congratulazioni!", new Vector2(halfScreenWidth-rText.MeasureTextEx(font, "Congratulazioni!", 70, 2).getX()*0.5f, posCartelloIntervallo.getY()+150), 70, 3, Color.WHITE);
+        raylib.text.DrawTextEx(font, "Hai preso "+puntiTotalizzati+" punti pane !!", new Vector2(halfScreenWidth-rText.MeasureTextEx(font, "Hai preso "+puntiTotalizzati+" punti pane !!", 70, 2).getX()*0.5f, posCartelloIntervallo.getY()+350), 70, 3, Color.WHITE);
+        raylib.text.DrawTextEx(font, "Caricando la prossima quest . . .", new Vector2(halfScreenWidth-rText.MeasureTextEx(font, "Caricando la prossima quest . . .", 70, 2).getX()*0.5f, posCartelloIntervallo.getY()+550), 70, 3, Color.WHITE);
+
+
         raylib.core.EndDrawing(); 
     }
 
@@ -107,12 +119,14 @@ public class PartitaView {
     }
 
     private void paintQuest(){
+        raylib.textures.DrawTextureEx(cartelloQuestTexture, poscartelloQuest,0,5f,Color.WHITE);
         raylib.textures.DrawTextureEx(donut, posLegendaDonut,0,2.5f,Color.WHITE);
         raylib.text.DrawTextEx(font, " x "+nDonut, posLegendaScrittaDonut, fontsize, 2, Color.WHITE);
         raylib.textures.DrawTextureEx(brioche, posLegendaBrioche,0,2.5f,Color.WHITE);
         raylib.text.DrawTextEx(font, " x "+nBrioche, posLegendaScrittaBrioche, fontsize, 2, Color.WHITE);
         raylib.textures.DrawTextureEx(baguette, posLegendaBaguette,0,2.5f,Color.WHITE);
         raylib.text.DrawTextEx(font, " x "+nBaguette, posLegendaScrittaBaguette, fontsize, 2, Color.WHITE);
+        raylib.text.DrawTextEx(font, "Quest: ", posScrittaQuest, fontsize+5, 2, Color.WHITE);
     }
 
     public void setCestaBaguetteEmptiness(boolean empty){

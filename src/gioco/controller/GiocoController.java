@@ -125,6 +125,7 @@ public class GiocoController {
                 if(model.prendiPane(TipoPane.BRIOCHE)){
                     model.presoPane(TipoPane.BRIOCHE);
                     model.addPunti(Pane.BRIOCHE_VALUE);
+                    punteggio+=Pane.BRIOCHE_VALUE;
                     System.out.println(model.getPunteggio());
                 }
             }
@@ -132,6 +133,7 @@ public class GiocoController {
                 if(model.prendiPane(TipoPane.DONUT)){
                     model.presoPane(TipoPane.DONUT);
                     model.addPunti(Pane.DONUT_VALUE);
+                    punteggio+=Pane.DONUT_VALUE;
                     System.out.println(model.getPunteggio());
                 }
             }
@@ -139,6 +141,7 @@ public class GiocoController {
                 if(model.prendiPane(TipoPane.BAGUETTE)){
                     model.presoPane(TipoPane.BAGUETTE);
                     model.addPunti(Pane.BAGUETTE_VALUE);
+                    punteggio+=Pane.BAGUETTE_VALUE;
                     System.out.println(model.getPunteggio());
                 }
             }
@@ -163,9 +166,10 @@ public class GiocoController {
 
     private void intermezzo(){
         while (statoPartita == StatoPartita.INTERMEZZO && statoApp!= Stato.ESCI) {
-            partitaView.paintIntermezzo();
+            partitaView.paintIntermezzo(punteggio);
             if(((int)(rCore.GetTime()-tempoInizio))>=10){
                 statoPartita=StatoPartita.GIOCANDO;
+                punteggio=0;
                 intermezzoLock.unlock();
             } 
         }

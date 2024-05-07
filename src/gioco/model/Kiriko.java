@@ -5,11 +5,13 @@ import com.raylib.java.core.rCore;
 public class Kiriko extends Thread{
 
     private Bancone bancone;
-    private Quest quest;
+    private int donutRichieste, baguetteRichieste, briocheRichieste;
     private volatile byte stagePartita;
 
     public Kiriko (Quest quest, Bancone bancone){
-        this.quest=quest;
+        donutRichieste=quest.getDonutRichieste();
+        briocheRichieste=quest.getBriocheRichieste();
+        baguetteRichieste=quest.getBaguetteRichieste();
         this.bancone= bancone;
         this.stagePartita= 0;
     }
@@ -44,9 +46,9 @@ public class Kiriko extends Thread{
 
     private void rifornisci() {
         short i;
-        for(i=0; i<(quest.getBaguetteRichieste()/3)+(Math.random()*6)+3;i++)    bancone.addBaguette(new Pane(TipoPane.BAGUETTE));
-        for(i=0; i<(quest.getDonutRichieste()/3)+(Math.random()*3)+1;i++)     bancone.addDonut(new Pane(TipoPane.DONUT));
-        for(i=0; i<(quest.getBriocheRichieste()/3)+(Math.random()*4)+2;i++)     bancone.addBrioche(new Pane(TipoPane.BRIOCHE));
+        for(i=0; i<(baguetteRichieste/3)+(Math.random()*6)+3;i++)    bancone.addBaguette(new Pane(TipoPane.BAGUETTE));
+        for(i=0; i<(donutRichieste/3)+(Math.random()*3)+1;i++)     bancone.addDonut(new Pane(TipoPane.DONUT));
+        for(i=0; i<(briocheRichieste/3)+(Math.random()*4)+2;i++)     bancone.addBrioche(new Pane(TipoPane.BRIOCHE));
     }
 
     public byte getStagePartita() {
