@@ -47,31 +47,53 @@ public class ModelGioco {
             }        
         }
     }
-
+    /**
+     * in base al tipo di pane che viene inserito il metodo restituisci se è riuscito a prenderlo
+     * @param tipo
+     * @return se è riuscito a prenderlo o no
+     */
     public boolean prendiPane(TipoPane tipo) {
         return bancone.prendiPane(tipo);
     }
-
+    /**
+     * ritorna true se il giocatore ha finito e folse se non ah finito la quest
+     * @return ritorna il risultato
+     */
     public boolean isQuestCompleted(){
         return quest.isQuestCompleted();
     }
-
+    /**
+     * serve al programma per ricevere quante baguette sono disponibili
+     * @return ritorna il numero di baguette disponibili
+     */
     public int getNumBaguetteDisponinbili() {
         return bancone.getNumBaguetteDisponinbili();
     }
-
+    /**
+     * serve al programma per ricevere quante dunat sono disponibili
+     * @return ritorna il numero di dunat disponibili
+     */
     public int getNumDonutDisponinbili() {
         return bancone.getNumDonutDisponinbili();
     }
-
+    /**
+     * serve al programma per ricevere quante brioche sono disponibili
+     * @return ritorna il numero di brioche disponibili
+     */
     public int getNumBriocheDisponinbili() {
         return bancone.getNumBriocheDisponinbili();
     }
-
+    /**
+     * serve al programma per ricevere lo stato. se positivo il consumer non si attiva, se negativo il consumer rimane attivo
+     * @return ritorna lo stato del programma
+     */
     public MyGate getIntermezzoLock() {
         return lock;
     }
-    
+    /**
+     * serve per ricavare lo stage in cui siamo
+     * @return il numero stage
+     */
     public byte getStagePartita(){
         return kiriko.getStagePartita();
     }

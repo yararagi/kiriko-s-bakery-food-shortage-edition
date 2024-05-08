@@ -4,6 +4,9 @@ import static main.Main.statoApp;
 
 import gioco.controller.GiocoController;
 import menu.model.Stato;
+/**
+ * il consumer è un threat che "ruba" i panini al giocatore. Come oggeti con cui interagiscie ha Bancone e lock
+ */
 
 public class Consumer extends Thread {
     private Bancone bancone;

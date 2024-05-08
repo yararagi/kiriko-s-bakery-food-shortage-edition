@@ -2,6 +2,10 @@ package gioco.model;
 
 import java.util.Vector;
 
+/**
+ * il bancone ha come funzione quella di mantenere i dati, come brioche, dunat o baguette
+ * 
+ */
 public class Bancone {
     private Vector<Pane> briocheDisponinbili, donutDisponinbili, baguetteDisponinbili;
 
@@ -37,23 +41,46 @@ public class Bancone {
         return false;
 
     }
-
+    /**
+     * 
+     * @return ritorna le baguette disponibili
+     */
     public int getNumBaguetteDisponinbili() {
         return baguetteDisponinbili.size();
     }
+    /**
+     * 
+     * @return ritorna le dunat disponibili
+     */
     public int getNumDonutDisponinbili() {
         return donutDisponinbili.size();
     }
+    /**
+     * 
+     * @return ritorna le brioche disponibili
+     */
     public int getNumBriocheDisponinbili() {
         return briocheDisponinbili.size();
     }
-
+    
+    /**
+     * 
+     * @param brioche
+     */
     public void addBrioche(Pane brioche){
         briocheDisponinbili.add(brioche);
     }  
+    /**
+     * 
+     * @param donut
+     */
     public void addDonut(Pane donut){
         donutDisponinbili.add(donut);
     }
+    /**
+     * 
+     * @param baguette
+     */
     public void addBaguette(Pane baguette){
         baguetteDisponinbili.add(baguette);
     }
