@@ -119,6 +119,8 @@ public class GiocoController {
                 partitaView.setnBaguette(model.getBaguetteRichieste());
                 partitaView.setnBrioche(model.getBriocheRichieste());
                 partitaView.setnDonut(model.getDonutRichieste());
+                partitaView.setCesteStatusPercentuale((float)model.getNumBaguetteDisponinbili()/(float)model.getnBaguetteFornite(),(float)model.getNumBriocheDisponinbili()/ (float)model.getnBriocheFornite(), (float)model.getNumDonutDisponinbili()/ (float)model.getnDonutFornite());
+                System.out.println(model.getNumBaguetteDisponinbili()+" "+model.getnBaguetteFornite()+" | "+model.getNumBriocheDisponinbili()+" "+ model.getnBriocheFornite()+" | "+ model.getNumDonutDisponinbili()+" "+ model.getnDonutFornite());
             }
 
             if(didPlayerTakeBrioche() == true){

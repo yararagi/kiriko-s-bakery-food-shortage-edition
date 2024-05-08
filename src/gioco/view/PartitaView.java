@@ -21,6 +21,7 @@ public class PartitaView {
     private Vector2 posCartelloIntervallo, posScrittaQuest, poscartelloQuest, cestaBriochePos, cestaBaguettePos, cestaDonutPos, pos00, posLegendaBaguette, posLegendaBrioche, posLegendaDonut, posLegendaScrittaBrioche, posLegendaScrittaBaguette, posLegendaScrittaDonut ;
     private Font font;
     private float halfScreenWidth=rCore.GetScreenWidth()*0.5f, halfScreenHeight= rCore.GetScreenHeight()*0.5f;
+    float percentualeCestaBrioche=1, percentualeCestaBaguette=1, percentualeCestaDonut=1;
     
 
     public PartitaView(){
@@ -115,7 +116,23 @@ public class PartitaView {
         raylib.textures.DrawTextureEx(cestaBriocheTexture[cestaBriocheStatus], cestaBriochePos, 0, 6, Color.WHITE);
         raylib.textures.DrawTextureEx(cestaDonutTexture[cestaDonutStatus], cestaDonutPos, 0, 6, Color.WHITE);
 
+        paintCesteStatus();
+
         raylib.textures.DrawTextureEx(vetroTexture, pos00, 0, 6, new Color(255, 255, 255, 75));
+    }
+
+    private void paintCesteStatus(){
+        raylib.shapes.DrawRectangle((int)cestaBaguette.getX(), (int)cestaBaguette.getY()-45, (int)cestaBaguette.getWidth(), 20, Color.LIGHTGRAY);
+        raylib.shapes.DrawRectangle((int)cestaBrioche.getX(), (int)cestaBrioche.getY()-45, (int)cestaBrioche.getWidth(), 20, Color.LIGHTGRAY);
+        raylib.shapes.DrawRectangle((int)cestaDonut.getX(), (int)cestaDonut.getY()-45, (int)cestaDonut.getWidth(), 20, Color.LIGHTGRAY);
+        
+        raylib.shapes.DrawRectangle((int)cestaBaguette.getX(), (int)cestaBaguette.getY()-45, (int)(percentualeCestaBaguette*cestaBaguette.getWidth()), 20, Color.GREEN);
+        raylib.shapes.DrawRectangle((int)cestaBrioche.getX(), (int)cestaBrioche.getY()-45, (int)(percentualeCestaBrioche*cestaBrioche.getWidth()), 20, Color.GREEN);
+        raylib.shapes.DrawRectangle((int)cestaDonut.getX(), (int)cestaDonut.getY()-45, (int)(percentualeCestaDonut*cestaDonut.getWidth()), 20, Color.GREEN);
+        
+        raylib.shapes.DrawRectangleLines((int)cestaBaguette.getX(), (int)cestaBaguette.getY()-45, (int)cestaBaguette.getWidth(), 20, Color.WHITE);
+        raylib.shapes.DrawRectangleLines((int)cestaBrioche.getX(), (int)cestaBrioche.getY()-45, (int)cestaBrioche.getWidth(), 20, Color.WHITE);
+        raylib.shapes.DrawRectangleLines((int)cestaDonut.getX(), (int)cestaDonut.getY()-45, (int)cestaDonut.getWidth(), 20, Color.WHITE);
     }
 
     private void paintQuest(){
@@ -153,6 +170,12 @@ public class PartitaView {
         stagePartitaSrc.setX(40*stage);
     }
 
+    public void setCesteStatusPercentuale(float percentualeCestaBaguette, float percentualeCestaBrioche, float percentualeCestaDonut){
+        this.percentualeCestaBaguette=percentualeCestaBaguette;
+        this.percentualeCestaBrioche=percentualeCestaBrioche;
+        this.percentualeCestaDonut=percentualeCestaDonut;
+    }
+
     public Rectangle getCestaBrioche() {
         return cestaBrioche;
     }
@@ -176,5 +199,6 @@ public class PartitaView {
         raylib.textures.UnloadTexture(cestaDonutTexture[0]);
         raylib.textures.UnloadTexture(cestaDonutTexture[1]);
         raylib.textures.UnloadTexture(stagePartitaSprite);
+        raylib.textures.UnloadTexture(cartelloQuestTexture);
     }
 }

@@ -92,5 +92,19 @@ public class ModelGioco {
     public void addPunti(int punti) {
         this.punteggio+=punti;
     }
+
+    public int getnBaguetteFornite() {
+        return kiriko.getnBaguetteFornite();
+    }
+
+    public int getnBriocheFornite() {
+        return kiriko.getnBriocheFornite();
+    }
+
+    public int getnDonutFornite() {
+        return kiriko.getnDonutFornite();
+    }
+
+    
     
 }
