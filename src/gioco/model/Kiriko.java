@@ -1,6 +1,7 @@
 package gioco.model;
-
-import com.raylib.java.core.rCore;
+/**
+ * Kiriko è un threat e serve a rifornire il bancone alla fine di un round
+ */
 
 public class Kiriko extends Thread{
 
@@ -46,7 +47,9 @@ public class Kiriko extends Thread{
             e.printStackTrace();
         }
     }
-
+    /**
+     * è il metodo che permette a Kiriko di rifornire i pani nel bancone 
+     */
     private void rifornisci() {
         short i;
         int temp1, temp2, temp3;
@@ -60,17 +63,31 @@ public class Kiriko extends Thread{
         for(i=0; i<temp3;i++)     bancone.addDonut(new Pane(TipoPane.DONUT));
         for(i=0; i<temp2;i++)     bancone.addBrioche(new Pane(TipoPane.BRIOCHE));
     }
-
+    /**
+     * ritorna lo stato della partita
+     * @return in che stato è
+     */
     public byte getStagePartita() {
         return stagePartita;
     }
-
+    /**
+     * serve per sapere queante baguette a rifornito Kiriko
+     * @return ritorna le baguette inserite
+     */
     public int getnBaguetteFornite() {
         return nBaguetteFornite;
     }
+    /**
+     * serve per sapere queante brioche a rifornito Kiriko
+     * @return ritorna le brioche inserite
+     */
     public int getnBriocheFornite() {
         return nBriocheFornite;
     }
+    /**
+     * serve per sapere queante dunat a rifornito Kiriko
+     * @return ritorna le dunat inserite
+     */
     public int getnDonutFornite() {
         return nDonutFornite;
     }

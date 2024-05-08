@@ -1,7 +1,9 @@
 package gioco.model;
 
 import java.io.Serializable;
-
+/**
+ * è la classe che fa le veci del giocatore. il giocatore interagisci con il Nome salvato e verra poi in seguito salvato  
+ */
 public class Giocatore implements Serializable {
     private static final long serialVersionUID = 1234567L;
     private int score;

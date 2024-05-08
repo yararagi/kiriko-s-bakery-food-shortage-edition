@@ -14,7 +14,11 @@ public class Bancone {
         donutDisponinbili=new Vector<>();
         baguetteDisponinbili=new Vector<>();
     }
-
+    /**
+     * serve a Consumer e GiocoController per prendere il pane
+     * @param tipo
+     * @return ritorna true se il pane selezionato è maggiore di 1 e false se è l'opposto
+     */
     public synchronized boolean prendiPane(TipoPane tipo){
         switch (tipo) {
             case BAGUETTE:

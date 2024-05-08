@@ -21,6 +21,10 @@ import gioco.view.SalvaView;
 import gioco.view.PartitaView;
 import menu.model.Stato;
 
+/**
+ * 
+ */
+
 public class GiocoController {
     public static StatoPartita statoPartita=StatoPartita.GIOCANDO;
     private SalvaView salvaView;
