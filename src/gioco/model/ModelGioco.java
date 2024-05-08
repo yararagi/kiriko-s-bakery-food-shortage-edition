@@ -3,6 +3,11 @@ package gioco.model;
 import java.lang.Thread.State;
 import java.util.ArrayList;
 
+/**
+ * modello interagiscie con i modelli: Kiriko, Bancone, Quest, MyGate e vari Consumer.
+ * e serve per farli interagire in maniera correta tra di loro
+ */
+
 public class ModelGioco {
     private Kiriko kiriko;
     private Bancone bancone;
@@ -97,42 +102,67 @@ public class ModelGioco {
     public byte getStagePartita(){
         return kiriko.getStagePartita();
     }
-
+    /**
+     * serve per ricevere il numero di brioche necessari per completare la quest
+     * @return  numero brioche
+     */
     public int getBriocheRichieste() {
         return quest.getBriocheRichieste();
     }
-
+    /**
+     * serve per ricevere il numero di baguette necessari per completare la quest
+     * @return  numero baguette
+     */
     public int getBaguetteRichieste() {
         return quest.getBaguetteRichieste();
     }
-
+    /**
+     * serve per ricevere il numero di dunat necessari per completare la quest
+     * @return  numero dunat
+     */
     public int getDonutRichieste() {
         return quest.getDonutRichieste();
     }
-
+    /**
+     * 
+     * @param tipoPane
+     */
     public void presoPane(TipoPane tipoPane) {
         quest.presoPane(tipoPane);
     }
-
+    /**
+     * serve per ricevere il punteggio ceh il giocatore ha aquisito
+     * @return lo "score" in numero
+     */
     public int getPunteggio() {
         return punteggio;
     }
+    /**
+     * serve ad ogni interazione per sommare i punti ceh il giocatore ha fatto
+     * @param punti
+     */
     public void addPunti(int punti) {
         this.punteggio+=punti;
     }
-
+    /**
+     * serve per ricevere quante baguette kiriko ha sfornato
+     * @return il numero di baguette ceh ha sfornato
+     */
     public int getnBaguetteFornite() {
         return kiriko.getnBaguetteFornite();
     }
-
+    /**
+     * serve per ricevere quante brioche kiriko ha sfornato
+     * @return il numero di brioche ceh ha sfornato
+     */
     public int getnBriocheFornite() {
         return kiriko.getnBriocheFornite();
     }
-
+    /**
+     * serve per ricevere quante dunat kiriko ha sfornato
+     * @return il numero di dunat ceh ha sfornato
+     */
     public int getnDonutFornite() {
         return kiriko.getnDonutFornite();
     }
-
-    
-    
 }

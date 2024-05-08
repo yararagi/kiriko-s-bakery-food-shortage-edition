@@ -1,5 +1,9 @@
 package gioco.model;
 
+/**
+ * serve per inserire la differenze dei pani ossia il punteggio 
+ */
+
 public class Pane {
     @SuppressWarnings("unused")
     private byte puntiPane;
