@@ -17,7 +17,7 @@ public class ModelGioco {
     private MyGate lock; 
     private int punteggio;
     private byte nConsumers;
-
+    
     public ModelGioco(MyGate lock){
         punteggio=0;
         nLivello=1;
@@ -31,13 +31,17 @@ public class ModelGioco {
             consumers.add(new Consumer(bancone, lock));
         }
     }
-
+    /**
+     * serve a model controller nel creare una nuova quest, con il livello superiore, e una nuova kiriko per il prossimo livello
+     */
     public void preparaProssimoLivello(){
         nLivello+=1;
         quest= new Quest((short)(nLivello+1));
         kiriko= new Kiriko(quest, bancone);
     }
-
+    /**
+     * conrolla i threat e se necessario li fa partire
+     */
     public void startPartita() {
         if(kiriko.getState()==State.NEW){
             kiriko.start();
