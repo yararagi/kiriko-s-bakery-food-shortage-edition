@@ -18,7 +18,7 @@ public class Consumer extends Thread {
     public void run() {
         try {
             while(GiocoController.statoPartita==StatoPartita.GIOCANDO && statoApp!= Stato.ESCI){
-                Thread.sleep((long)((Math.random()*2500)+750)); //per non farli accedere tutti assieme bph
+                Thread.sleep((long)((Math.random()*2000)+750)); //per non farli accedere tutti assieme bph
                 lock.tryToPassThrough();
                 switch((int)(Math.random()*3)){
                     case 0:
@@ -34,11 +34,10 @@ public class Consumer extends Thread {
                         System.out.println(this.getName()+"ha preso brioche, rimaste: "+bancone.getNumBriocheDisponinbili());
                         break;  
                     default:
-                        System.out.println("ermm strano");
+                        System.err.println("ermm strano");
                         break;
                 }
-                Thread.sleep(1000); //il tempo dell'animazione
-                Thread.sleep(3000);
+                Thread.sleep(1000); //il tempo dell'animazione boh
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

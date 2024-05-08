@@ -120,7 +120,6 @@ public class GiocoController {
                 partitaView.setnBrioche(model.getBriocheRichieste());
                 partitaView.setnDonut(model.getDonutRichieste());
                 partitaView.setCesteStatusPercentuale((float)model.getNumBaguetteDisponinbili()/(float)model.getnBaguetteFornite(),(float)model.getNumBriocheDisponinbili()/ (float)model.getnBriocheFornite(), (float)model.getNumDonutDisponinbili()/ (float)model.getnDonutFornite());
-                System.out.println(model.getNumBaguetteDisponinbili()+" "+model.getnBaguetteFornite()+" | "+model.getNumBriocheDisponinbili()+" "+ model.getnBriocheFornite()+" | "+ model.getNumDonutDisponinbili()+" "+ model.getnDonutFornite());
             }
 
             if(didPlayerTakeBrioche() == true){
@@ -128,7 +127,6 @@ public class GiocoController {
                     model.presoPane(TipoPane.BRIOCHE);
                     model.addPunti(Pane.BRIOCHE_VALUE);
                     punteggio+=Pane.BRIOCHE_VALUE;
-                    System.out.println(model.getPunteggio());
                 }
             }
             if(didPlayerTakeDonut() == true){
@@ -136,7 +134,6 @@ public class GiocoController {
                     model.presoPane(TipoPane.DONUT);
                     model.addPunti(Pane.DONUT_VALUE);
                     punteggio+=Pane.DONUT_VALUE;
-                    System.out.println(model.getPunteggio());
                 }
             }
             if(didPlayerTakeBaguette() == true){
@@ -144,7 +141,6 @@ public class GiocoController {
                     model.presoPane(TipoPane.BAGUETTE);
                     model.addPunti(Pane.BAGUETTE_VALUE);
                     punteggio+=Pane.BAGUETTE_VALUE;
-                    System.out.println(model.getPunteggio());
                 }
             }
            
@@ -218,7 +214,6 @@ public class GiocoController {
                     nome[nLettere]=' ';
                 }
                 if(!String.copyValueOf(nome).replaceAll(" +", "").equals("")){
-                    System.out.println(model.getPunteggio());
                     risultatiGiocatori.add(new Giocatore(punteggio, String.copyValueOf(nome).trim().replaceAll(" +", " ")));
                     statoPartita= StatoPartita.TORNAALMENU;
                 }

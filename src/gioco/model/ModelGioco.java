@@ -11,6 +11,7 @@ public class ModelGioco {
     private ArrayList<Consumer> consumers;
     private MyGate lock; 
     private int punteggio;
+    private byte nConsumers;
 
     public ModelGioco(MyGate lock){
         punteggio=0;
@@ -20,7 +21,8 @@ public class ModelGioco {
         kiriko= new Kiriko(quest, bancone);
         consumers= new ArrayList<>();
         this.lock= lock;
-        for(byte i=0; i<3;i++){
+        nConsumers=3;
+        for(byte i=0; i<nConsumers;i++){
             consumers.add(new Consumer(bancone, lock));
         }
     }
@@ -35,7 +37,11 @@ public class ModelGioco {
         if(kiriko.getState()==State.NEW){
             kiriko.start();
         }
-        for(byte i=0; i<3;i++){
+        if(nLivello%3==0){
+            consumers.add(new Consumer(bancone, lock));
+            nConsumers++;
+        }
+        for(byte i=0; i<nConsumers;i++){
             if(consumers.get(i).getState()==State.NEW){
                 consumers.get(i).start();
             }        

@@ -7,10 +7,10 @@ public class Quest {
     private Map<TipoPane, Integer> paniRichiesti= new HashMap<>();
 
     public Quest(short nLivello){
-        float moltiplicatore=nLivello*0.1f+((float)(Math.random()*1.5f) +1) ;
-        paniRichiesti.put(TipoPane.BAGUETTE, (int)(10*moltiplicatore));
-        paniRichiesti.put(TipoPane.BRIOCHE, (int)(5*moltiplicatore));
-        paniRichiesti.put(TipoPane.DONUT, (int)(0.6*moltiplicatore));
+        float moltiplicatore=nLivello*0.1f+((float)(Math.random()*0.4f+0.15f) +1) ;
+        paniRichiesti.put(TipoPane.BAGUETTE, (int)(Math.pow(9,moltiplicatore)));
+        paniRichiesti.put(TipoPane.BRIOCHE, (int)(Math.pow(6,moltiplicatore)));
+        paniRichiesti.put(TipoPane.DONUT, (int)(Math.pow(2,moltiplicatore)));
     }
 
     public int getBriocheRichieste() {
@@ -29,7 +29,7 @@ public class Quest {
         if(paniRichiesti.get(tipoPane)>0){
             paniRichiesti.replace(tipoPane, paniRichiesti.get(tipoPane)-1);
         }
-        System.out.println("quest "+tipoPane+" " +paniRichiesti.get(tipoPane));
+        System.out.println("player ha preso una "+tipoPane+" ["+paniRichiesti.get(tipoPane)+" rimaste da prendere]");
     }
 
     public boolean isQuestCompleted(){
