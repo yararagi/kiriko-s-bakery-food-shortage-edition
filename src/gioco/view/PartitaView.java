@@ -21,7 +21,8 @@ public class PartitaView {
     private Vector2 posCartelloIntervallo, posScrittaQuest, poscartelloQuest, cestaBriochePos, cestaBaguettePos, cestaDonutPos, pos00, posLegendaBaguette, posLegendaBrioche, posLegendaDonut, posLegendaScrittaBrioche, posLegendaScrittaBaguette, posLegendaScrittaDonut ;
     private Font font;
     private float halfScreenWidth=rCore.GetScreenWidth()*0.5f, halfScreenHeight= rCore.GetScreenHeight()*0.5f;
-    float percentualeCestaBrioche=1, percentualeCestaBaguette=1, percentualeCestaDonut=1;
+    private float percentualeCestaBrioche=1, percentualeCestaBaguette=1, percentualeCestaDonut=1;
+    private Animazioni animazioneKiriko, animazioneConsumer;
     
 
     public PartitaView(){
@@ -68,6 +69,12 @@ public class PartitaView {
         poscartelloQuest=new Vector2(halfScreenWidth-25*5, 0);
         posScrittaQuest= new Vector2(halfScreenWidth-(rText.MeasureTextEx(font, "Quest:", fontsize+5, 2).getX()*0.5f), 15);
         posCartelloIntervallo= new Vector2(halfScreenWidth-25*20f, halfScreenHeight-20f*20);
+        animazioneKiriko= new Animazioni(
+            rTextures.LoadTexture("texture/animazione/Kiriko.png"),
+            new Rectangle(0,0,67*6,72*6),
+            new Rectangle(),
+            pos00, 0, Color.WHITE,
+            (short)5, (short)21);
     }
 
     public void paintCeste(){
@@ -145,6 +152,7 @@ public class PartitaView {
         raylib.text.DrawTextEx(font, " x "+nBaguette, posLegendaScrittaBaguette, fontsize, 2, Color.WHITE);
         raylib.text.DrawTextEx(font, "Quest: ", posScrittaQuest, fontsize+5, 2, Color.WHITE);
     }
+
 
     public void setCestaBaguetteEmptiness(boolean empty){
         cestaBaguetteStatus= (empty) ? ((byte) 0) : ((byte) 1);
