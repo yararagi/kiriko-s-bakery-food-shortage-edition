@@ -22,7 +22,7 @@ import gioco.view.PartitaView;
 import menu.model.Stato;
 
 /**
- * 
+ *  serve al programma per gestire il giocatore e più in generale il gioco
  */
 
 public class GiocoController {
@@ -92,7 +92,10 @@ public class GiocoController {
         }
     }
 
-    
+    /**
+     * gioca a varie funzioni tra cui: inserire un timer di gioco, inserire per il "disegno" 
+     * le varie texture e controllare se il player a preso il tipo di pane e di conseguenza aggiungere i punti necessari.
+     */
     private void gioca(){
         model.startPartita();
 
@@ -155,17 +158,30 @@ public class GiocoController {
             }
         }
     }
-
+    /**
+     * serve per vedere la posizione del mouse, se è sopra le baguette allora è true sennò è false
+     * @return risultato 
+     */
     private boolean didPlayerTakeBaguette(){
         return (raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), partitaView.getCestaBaguette())&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT));
     }
+    /**
+     * serve per vedere la posizione del mouse, se è sopra le brioche allora è true sennò è false
+     * @return risultato 
+     */
     private boolean didPlayerTakeBrioche(){
         return (raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), partitaView.getCestaBrioche())&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT));
     }
+    /**
+     * serve per vedere la posizione del mouse, se è sopra le bdunat allora è true sennò è false
+     * @return risultato 
+     */
     private boolean didPlayerTakeDonut(){
         return (raylib.shapes.CheckCollisionPointRec(rCore.GetMousePosition(), partitaView.getCestaDonut())&&raylib.core.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT));
     }
-
+    /**
+     * serve per iniziare la fase di intramezzo
+     */
     private void intermezzo(){
         while (statoPartita == StatoPartita.INTERMEZZO && statoApp!= Stato.ESCI) {
             partitaView.paintIntermezzo(punteggio);
@@ -176,7 +192,10 @@ public class GiocoController {
             } 
         }
     }
-    
+    /**
+     * salva oltre che il punteggio il nome che lo user inseriscie la casella di testo
+     * @param punteggio
+     */
     private void salva(int punteggio){
         final byte MAX_INPUT_CHARS=14;
         char[] nome= new char[]{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
@@ -232,7 +251,9 @@ public class GiocoController {
 
         }
     }
-
+    /**
+     * serve per scaricare le texture e i font dalla memoria
+     */
     public void unload(){
         partitaView.unload();
         salvaView.unload();

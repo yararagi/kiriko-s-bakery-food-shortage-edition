@@ -16,7 +16,9 @@ public class RisultatiGiocatori implements Serializable {
         listaGiocatori= new ArrayList<Giocatore>(0);
         recuperaRisultati();
     }
-    
+    /**
+     * serve a ricavare i dati salvati nel file 
+     */
     public void recuperaRisultati(){
         new Thread(new Runnable() {
             @SuppressWarnings("unchecked")
@@ -41,6 +43,9 @@ public class RisultatiGiocatori implements Serializable {
             }
         }).start();
     }
+    /**
+     * serve per inserire i dati nel file
+     */
     public void salvaRisultati(){
         new Thread(new Runnable() {
             @Override
