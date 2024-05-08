@@ -2,6 +2,8 @@ package gioco.model;
 
 import java.lang.Thread.State;
 import java.util.ArrayList;
+import java.util.Vector;
+import java.util.concurrent.Semaphore;
 
 /**
  * modello interagiscie con i modelli: Kiriko, Bancone, Quest, MyGate e vari Consumer.
@@ -14,21 +16,26 @@ public class ModelGioco {
     private Quest quest;
     private short nLivello;
     private ArrayList<Consumer> consumers;
-    private MyGate lock; 
+    private MyGate lock;
+    private Semaphore lockAnimazioneKiriko;
     private int punteggio;
     private byte nConsumers;
+    private Vector<Byte> statusAnimazioneConsumers;
     
-    public ModelGioco(MyGate lock){
+    public ModelGioco(MyGate lock, Semaphore lockAnimazioneKiriko){
         punteggio=0;
         nLivello=1;
         bancone= new Bancone();
         quest= new Quest(nLivello);
-        kiriko= new Kiriko(quest, bancone);
+        kiriko= new Kiriko(quest, bancone,lockAnimazioneKiriko);
         consumers= new ArrayList<>();
         this.lock= lock;
+        this.lockAnimazioneKiriko= lockAnimazioneKiriko;
         nConsumers=3;
+        this.statusAnimazioneConsumers=new Vector<>();
         for(byte i=0; i<nConsumers;i++){
-            consumers.add(new Consumer(bancone, lock));
+            statusAnimazioneConsumers.add((byte)-1);
+            consumers.add(new Consumer(bancone, lock, statusAnimazioneConsumers, i));
         }
     }
     /**
@@ -37,7 +44,7 @@ public class ModelGioco {
     public void preparaProssimoLivello(){
         nLivello+=1;
         quest= new Quest((short)(nLivello+1));
-        kiriko= new Kiriko(quest, bancone);
+        kiriko= new Kiriko(quest, bancone, lockAnimazioneKiriko);
     }
     /**
      * conrolla i threat e se necessario li fa partire
@@ -47,7 +54,7 @@ public class ModelGioco {
             kiriko.start();
         }
         if(nLivello%3==0){
-            consumers.add(new Consumer(bancone, lock));
+            consumers.add(new Consumer(bancone, lock, statusAnimazioneConsumers,nConsumers));
             nConsumers++;
         }
         for(byte i=0; i<nConsumers;i++){
@@ -98,6 +105,13 @@ public class ModelGioco {
      */
     public MyGate getIntermezzoLock() {
         return lock;
+    }
+    /**
+     * serve al programma per sincronizzare l'avvio dell'animazione di rifornimento di kiriko 
+     * @return ritorna lo stato del programma
+     */
+    public Semaphore getLockAnimazioneKiriko() {
+        return lockAnimazioneKiriko;
     }
     /**
      * serve per ricavare lo stage in cui siamo
@@ -168,5 +182,12 @@ public class ModelGioco {
      */
     public int getnDonutFornite() {
         return kiriko.getnDonutFornite();
+    }
+    /**
+     * riceve un dato che serve ad animare
+     * @return vector con dentro gli stati delle animazioni dei consumers
+     */
+    public Vector<Byte> getStatusAnimazioneConsumers() {
+        return statusAnimazioneConsumers;
     }
 }

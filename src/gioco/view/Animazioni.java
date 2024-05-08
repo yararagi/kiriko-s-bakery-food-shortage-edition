@@ -9,7 +9,8 @@ import com.raylib.java.textures.rTextures;
 
 public class Animazioni {
     private Texture2D texture;
-    private Rectangle src, dest; 
+    private Rectangle src, dest;
+    private float destOgX; 
     private Vector2 origin; 
     private float rotation; 
     private Color tint ;
@@ -21,6 +22,7 @@ public class Animazioni {
         this.texture = texture;
         this.src = src;
         this.dest = dest;
+        this.destOgX=dest.x;
         this.origin = origin;
         this.rotation = rotation;
         this.tint = tint;
@@ -44,5 +46,24 @@ public class Animazioni {
         short frame= (short)((rCore.GetTime()*this.framesPerSecond)%this.howManyFrames);
         this.src.x=0+frame*this.src.width;
         rTextures.DrawTexturePro(this.texture, this.src, this.dest, this.origin, this.rotation, this.tint);
+    }
+
+    public void avanti(){
+        this.dest.x-=155f*rCore.GetFrameTime();
+    }
+
+    public boolean hasAnimationEnded(){
+        if((short)((rCore.GetTime()*this.framesPerSecond)%this.howManyFrames)==this.howManyFrames-1){
+            this.dest.x=this.destOgX;
+            return true;
+        }
+        return false;
+    }
+
+    public void setDest(float x, float y, float w, float h) {
+        dest.x=x;
+        dest.y=y;
+        dest.width=w;
+        dest.height=h;
     }
 }

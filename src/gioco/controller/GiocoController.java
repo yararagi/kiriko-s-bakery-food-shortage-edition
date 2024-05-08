@@ -5,6 +5,8 @@ import static main.Main.statoApp;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
+import java.util.concurrent.Semaphore;
 
 import com.raylib.java.core.rCore;
 import com.raylib.java.core.input.Keyboard;
@@ -35,6 +37,8 @@ public class GiocoController {
     private MyGate intermezzoLock;
     private double tempoInizio;
     private int punteggio;
+    private Semaphore lockAnimazioneKiriko;
+    private Vector<Byte> animazioniConsumers;
 
     public GiocoController(SalvaView salvaView, PartitaView partitaView, RisultatiGiocatori risultatiGiocatori, ModelGioco model){
         this.salvaView= salvaView;
@@ -43,6 +47,8 @@ public class GiocoController {
         this.partitaView= partitaView;
         this.timerRound= new Timer();
         this.intermezzoLock= model.getIntermezzoLock();
+        this.lockAnimazioneKiriko=model.getLockAnimazioneKiriko();
+        this.animazioniConsumers=model.getStatusAnimazioneConsumers();
         tempoInizio=0;
         punteggio=0;
     }
@@ -105,7 +111,7 @@ public class GiocoController {
                     System.out.println("check win "+rCore.GetTime());
                     if(model.isQuestCompleted()==false){
                         punteggio=model.getPunteggio();
-                        model=new ModelGioco(intermezzoLock); 
+                        model=new ModelGioco(intermezzoLock, lockAnimazioneKiriko); 
                         statoPartita= StatoPartita.SALVA;
                         timerRound.cancel();
                     }else{
@@ -115,7 +121,7 @@ public class GiocoController {
                     }
                 }
                 
-            }, 30000);
+            }, 32000);
             
         while (statoPartita == StatoPartita.GIOCANDO && statoApp!= Stato.ESCI) {
             synchronized(this){
@@ -151,7 +157,7 @@ public class GiocoController {
                 }
             }
            
-            partitaView.paintPartita();
+            partitaView.paintPartita(lockAnimazioneKiriko, animazioniConsumers);
 
             if(intermezzoLock.isLocked()){
                 statoPartita= StatoPartita.INTERMEZZO;

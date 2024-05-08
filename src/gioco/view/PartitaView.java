@@ -3,6 +3,9 @@ package gioco.view;
 
 import static main.Main.raylib;
 
+import java.util.Vector;
+import java.util.concurrent.Semaphore;
+
 import com.raylib.java.core.Color;
 import com.raylib.java.core.rCore;
 import com.raylib.java.raymath.Vector2;
@@ -12,6 +15,7 @@ import com.raylib.java.text.Font;
 import com.raylib.java.text.rText;
 import com.raylib.java.textures.Texture2D;
 import com.raylib.java.textures.rTextures;
+
 
 public class PartitaView {
     private Rectangle cestaBrioche, cestaDonut, cestaBaguette, stagePartitaSrc, stagePartitaDest;
@@ -71,10 +75,18 @@ public class PartitaView {
         posCartelloIntervallo= new Vector2(halfScreenWidth-25*20f, halfScreenHeight-20f*20);
         animazioneKiriko= new Animazioni(
             rTextures.LoadTexture("texture/animazione/Kiriko.png"),
-            new Rectangle(0,0,67*6,72*6),
-            new Rectangle(),
+            new Rectangle(0,0,67,72),
+            new Rectangle(225*6,55*6,67*6,72*6),
             pos00, 0, Color.WHITE,
-            (short)5, (short)21);
+            (short)2, (short)21
+            );
+        animazioneConsumer= new Animazioni(
+            rTextures.LoadTexture("texture/animazione/sconosciuto.png"),
+            new Rectangle(0,0, 40, 60),
+            new Rectangle(),
+            pos00,0f, Color.WHITE,
+            (short)10,(short)8
+            );
     }
 
     public void paintCeste(){
@@ -83,14 +95,43 @@ public class PartitaView {
         rShapes.DrawRectangleRec(cestaDonut, Color.BROWN);
     }
 
-    public void paintPartita(){
+    public void paintPartita(Semaphore lockAnimazione, Vector<Byte> statusAnimazioneConsumers){
         raylib.core.BeginDrawing();
         raylib.core.ClearBackground(Color.BLACK);
         
         paintBackground();
-        painBancone();
         rTextures.DrawTexturePro(stagePartitaSprite, stagePartitaSrc, stagePartitaDest, pos00, 0, Color.WHITE);
         paintQuest();
+        if(lockAnimazione.availablePermits()>0) {
+            if (animazioneKiriko.hasAnimationEnded()) {
+                lockAnimazione.drainPermits();
+            }else{
+                animazioneKiriko.DrawAnimazione();
+                animazioneKiriko.avanti();
+            }
+        }
+        painBancone();
+        for(byte i=0; i<statusAnimazioneConsumers.size();i++){
+            switch(statusAnimazioneConsumers.get(i)){
+                
+                case 0:
+                    animazioneConsumer.setDest(184*6, 73*6, 40*6, 60*6);
+                    animazioneConsumer.DrawAnimazione();
+                    break;
+                case 1:
+                    animazioneConsumer.setDest(96*6, 73*6, 40*6, 60*6);
+                    animazioneConsumer.DrawAnimazione();
+                    break;
+                case 2:
+                    animazioneConsumer.setDest(140*6, 73*6, 40*6, 60*6);
+                    animazioneConsumer.DrawAnimazione();
+                    break;
+                case -1:
+                    break;
+                default:
+                    break;
+            }
+        }
 
         raylib.core.EndDrawing();
     }

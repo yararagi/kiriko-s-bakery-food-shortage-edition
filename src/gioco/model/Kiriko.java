@@ -1,4 +1,7 @@
 package gioco.model;
+
+import java.util.concurrent.Semaphore;
+
 /**
  * Kiriko è un threat e serve a rifornire il bancone alla fine di un round
  */
@@ -9,8 +12,9 @@ public class Kiriko extends Thread{
     private int donutRichieste, baguetteRichieste, briocheRichieste;
     private volatile byte stagePartita;
     private volatile int  nBaguetteFornite, nBriocheFornite, nDonutFornite;
+    private Semaphore lockAnimazione;
 
-    public Kiriko (Quest quest, Bancone bancone){
+    public Kiriko (Quest quest, Bancone bancone, Semaphore lockAnimazione){
         donutRichieste=quest.getDonutRichieste();
         briocheRichieste=quest.getBriocheRichieste();
         baguetteRichieste=quest.getBaguetteRichieste();
@@ -19,24 +23,31 @@ public class Kiriko extends Thread{
         nBaguetteFornite=1;
         nBaguetteFornite=1;
         nDonutFornite=1;
+        this.lockAnimazione= lockAnimazione;
     }
 
     @Override
     public void run() {
         try {
-            rifornisci();
+            lockAnimazione.release(); 
             stagePartita=0;
-            System.out.println("fase0");
-            Thread.sleep(9500);
+            Thread.sleep(2200);
+            rifornisci();
+            System.out.println("fase0 "+lockAnimazione.availablePermits());
+            Thread.sleep(7800);
+            lockAnimazione.release();
+            Thread.sleep(1700);
             stagePartita=1;
-            System.out.println("fase1");
+            System.out.println("fase1 "+lockAnimazione.availablePermits());
             Thread.sleep(500);
             stagePartita=2;
-            System.out.println("fase2");
+            System.out.println("fase2 "+lockAnimazione.availablePermits());
             rifornisci();
-            Thread.sleep(9500);
+            Thread.sleep(7800);
+            lockAnimazione.release();
+            Thread.sleep(1700);
             stagePartita=3;
-            System.out.println("fase3");
+            System.out.println("fase3 "+lockAnimazione.availablePermits());
             Thread.sleep(500);
             stagePartita=4;
             System.out.println("fase4");

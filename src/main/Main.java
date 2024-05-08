@@ -3,6 +3,7 @@ package main;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Semaphore;
 
 import com.raylib.java.Raylib;
 import com.raylib.java.core.rCore;
@@ -35,7 +36,7 @@ public class Main {
         risultatiGiocatori= new RisultatiGiocatori();
         
         menuController= new MenuController(new MenuView(), new RisultatiView(), risultatiGiocatori);
-        giocoController= new GiocoController(new SalvaView(),new PartitaView(), risultatiGiocatori, new ModelGioco(new MyGate()));
+        giocoController= new GiocoController(new SalvaView(),new PartitaView(), risultatiGiocatori, new ModelGioco(new MyGate(), new Semaphore(0)));
 
         raylib.core.SetExitKey(0);
         new Timer().scheduleAtFixedRate(new TimerTask() {

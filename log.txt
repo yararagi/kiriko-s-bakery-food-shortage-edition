@@ -100,13 +100,13 @@ lavori di fitting del progetto, UML, java docs, power point, implementazione imm
 grafica partita
 
 ✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦
-[5 maggio][yari☆ && T1r4m1su]
+[5 maggio][yari☆]
 
-barra stato riempimento ceste + fixata roba 
+barra stato riempimento ceste + fixata roba
 
 ✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦
-[][]
+[5 maggio][yari☆ && T1r4m1su]
 
-
+coding animazioni kiriko e consumers
 
 ✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦-✦
