@@ -189,8 +189,10 @@ public class GiocoController {
      * serve per iniziare la fase di intramezzo
      */
     private void intermezzo(){
+        byte puntini=0;
         while (statoPartita == StatoPartita.INTERMEZZO && statoApp!= Stato.ESCI) {
-            partitaView.paintIntermezzo(punteggio);
+            puntini=(byte)(((int)(rCore.GetTime()-tempoInizio))%4); 
+            partitaView.paintIntermezzo(punteggio,puntini);
             if(((int)(rCore.GetTime()-tempoInizio))>=10){
                 statoPartita=StatoPartita.GIOCANDO;
                 punteggio=0;
