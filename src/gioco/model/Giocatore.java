@@ -16,7 +16,7 @@ public class Giocatore implements Serializable {
 
     @Override
     public String toString() {
-        return "[nome=" + nome + "punteggio=" + score+"]";
+        return "[nome=" + nome + " punteggio=" + score+"]";
     }
     /**
      * serve per ricevere i punti che ha totalizato il giocatoe in una partita
