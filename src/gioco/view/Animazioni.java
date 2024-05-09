@@ -14,7 +14,8 @@ public class Animazioni {
     private Vector2 origin; 
     private float rotation; 
     private Color tint ;
-    private short framesPerSecond, howManyFrames;
+    private short framesPerSecond, howManyFrames, currentFrame;
+    private double tempoInizio;
 
 
     public Animazioni(Texture2D texture, Rectangle src, Rectangle dest, Vector2 origin, float rotation, Color tint,
@@ -28,6 +29,8 @@ public class Animazioni {
         this.tint = tint;
         this.framesPerSecond = framesPerSecond;
         this.howManyFrames = howManyFrames;
+        this.currentFrame=-1;
+        tempoInizio=0;
     }
 
     public static void DrawAnimazione(Animazioni animazione){
@@ -43,21 +46,30 @@ public class Animazioni {
     }
 
     public void DrawAnimazione(){
-        short frame= (short)((rCore.GetTime()*this.framesPerSecond)%this.howManyFrames);
-        this.src.x=0+frame*this.src.width;
+        if(currentFrame==-1){
+            tempoInizio=rCore.GetTime();
+            currentFrame=0;
+            this.dest.x=this.destOgX;
+        }
+        if(currentFrame>=this.howManyFrames){
+            this.dest.x=this.destOgX;
+            return;
+        }
+        currentFrame= (short)(((rCore.GetTime()-tempoInizio)*this.framesPerSecond)%this.howManyFrames);
+        this.src.x=0+currentFrame*this.src.width;
         rTextures.DrawTexturePro(this.texture, this.src, this.dest, this.origin, this.rotation, this.tint);
     }
 
     public void avanti(){
-        this.dest.x-=155f*rCore.GetFrameTime();
+        this.dest.x-=290f*rCore.GetFrameTime();
     }
 
     public boolean hasAnimationEnded(){
-        if((short)((rCore.GetTime()*this.framesPerSecond)%this.howManyFrames)==this.howManyFrames-1){
-            this.dest.x=this.destOgX;
+        if(currentFrame>=this.howManyFrames-1 && currentFrame!=-1){
+            currentFrame=-1;
             return true;
         }
-        return false;
+        return false ;   
     }
 
     public void setDest(float x, float y, float w, float h) {
