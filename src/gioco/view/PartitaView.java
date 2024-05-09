@@ -78,7 +78,7 @@ public class PartitaView {
             new Rectangle(0,0,67,72),
             new Rectangle(225*6,55*6,67*6,72*6),
             pos00, 0, Color.WHITE,
-            (short)2, (short)21
+            (short)5, (short)21
             );
         animazioneConsumer= new Animazioni(
             rTextures.LoadTexture("texture/animazione/sconosciuto.png"),
@@ -103,12 +103,11 @@ public class PartitaView {
         rTextures.DrawTexturePro(stagePartitaSprite, stagePartitaSrc, stagePartitaDest, pos00, 0, Color.WHITE);
         paintQuest();
         if(lockAnimazione.availablePermits()>0) {
+            animazioneKiriko.DrawAnimazione();
             if (animazioneKiriko.hasAnimationEnded()) {
                 lockAnimazione.drainPermits();
-            }else{
-                animazioneKiriko.DrawAnimazione();
-                animazioneKiriko.avanti();
             }
+            animazioneKiriko.avanti();
         }
         painBancone();
         for(byte i=0; i<statusAnimazioneConsumers.size();i++){
