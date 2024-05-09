@@ -135,7 +135,24 @@ public class PartitaView {
         raylib.core.EndDrawing();
     }
 
-    public void paintIntermezzo(int puntiTotalizzati){
+    public void paintIntermezzo(int puntiTotalizzati, byte caricamento){
+        String puntini="";
+        switch (caricamento) {
+            case 0:
+                puntini="";
+                break;
+            case 1:
+                puntini=".";
+                break;
+            case 2:
+                puntini=". .";
+                break;
+            case 3:
+                puntini=". . .";
+                break;
+            default:
+                break;
+        }
         raylib.core.BeginDrawing();
         raylib.core.ClearBackground(Color.BLACK);
         
@@ -146,7 +163,7 @@ public class PartitaView {
         raylib.textures.DrawTextureEx(cartelloQuestTexture, posCartelloIntervallo, 0, 20f, Color.WHITE);
         raylib.text.DrawTextEx(font, "Congratulazioni!", new Vector2(halfScreenWidth-rText.MeasureTextEx(font, "Congratulazioni!", 70, 2).getX()*0.5f, posCartelloIntervallo.getY()+150), 70, 3, Color.WHITE);
         raylib.text.DrawTextEx(font, "Hai preso "+puntiTotalizzati+" punti pane !!", new Vector2(halfScreenWidth-rText.MeasureTextEx(font, "Hai preso "+puntiTotalizzati+" punti pane !!", 70, 2).getX()*0.5f, posCartelloIntervallo.getY()+350), 70, 3, Color.WHITE);
-        raylib.text.DrawTextEx(font, "Caricando la prossima quest . . .", new Vector2(halfScreenWidth-rText.MeasureTextEx(font, "Caricando la prossima quest . . .", 70, 2).getX()*0.5f, posCartelloIntervallo.getY()+550), 70, 3, Color.WHITE);
+        raylib.text.DrawTextEx(font, "Caricando la prossima quest "+puntini, new Vector2(halfScreenWidth-rText.MeasureTextEx(font, "Caricando la prossima quest . . .", 70, 2).getX()*0.5f, posCartelloIntervallo.getY()+550), 70, 3, Color.WHITE);
 
 
         raylib.core.EndDrawing(); 
