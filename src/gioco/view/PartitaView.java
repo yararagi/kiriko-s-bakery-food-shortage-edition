@@ -115,15 +115,15 @@ public class PartitaView {
             switch(statusAnimazioneConsumers.get(i)){
                 
                 case 0:
-                    animazioneConsumer.setDest(184*6, 73*6, 40*6, 60*6);
+                    animazioneConsumer.setDest(164*6, 63*6, 40*12, 60*12);
                     animazioneConsumer.DrawAnimazione();
                     break;
                 case 1:
-                    animazioneConsumer.setDest(96*6, 73*6, 40*6, 60*6);
+                    animazioneConsumer.setDest(76*6, 63*6, 40*12, 60*12);
                     animazioneConsumer.DrawAnimazione();
                     break;
                 case 2:
-                    animazioneConsumer.setDest(140*6, 73*6, 40*6, 60*6);
+                    animazioneConsumer.setDest(120*6, 63*6, 40*12, 60*12);
                     animazioneConsumer.DrawAnimazione();
                     break;
                 case -1:
