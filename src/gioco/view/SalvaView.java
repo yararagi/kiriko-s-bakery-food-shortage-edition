@@ -9,17 +9,22 @@ import com.raylib.java.shapes.Rectangle;
 import com.raylib.java.shapes.rShapes;
 import com.raylib.java.text.Font;
 import com.raylib.java.text.rText;
+import com.raylib.java.textures.Texture2D;
+import com.raylib.java.textures.rTextures;
 
 public class SalvaView {
     private Rectangle inserisciNome;
     private Rectangle finestra;
     private Font fontRegular;
     private byte fontSize;
-    Vector2 nomeSize;
+    Vector2 nomeSize, pos00;
+    Texture2D background;
 
     public SalvaView(){
         fontSize= 30;
         fontRegular= raylib.text.LoadFontEx("font/MagicBreadRegular.ttf",fontSize, null, 0);
+        pos00=new Vector2(0,0);
+        background= rTextures.LoadTexture("texture/background/sharpen_city-town-pixel-artwork-aesthetic-blur-1600x900-wallpx.com.jpg");
 
         float width, height;
         width= rCore.GetScreenWidth()/4;
@@ -40,8 +45,9 @@ public class SalvaView {
         raylib.core.ClearBackground(Color.BLACK);
         
         //
+        raylib.textures.DrawTextureEx(background, pos00, 0f, 1.2f, Color.WHITE);
         rShapes.DrawRectangleRec(finestra, Color.LIGHTGRAY);
-        raylib.shapes.DrawRectangleLinesEx(finestra, 0.5f, Color.DARKGRAY);
+        raylib.shapes.DrawRectangleLinesEx(finestra, 0.5f, Color.WHITE);
         rShapes.DrawRectangleRec(inserisciNome, Color.WHITE);
         raylib.shapes.DrawRectangleLinesEx(inserisciNome, 1, Color.DARKGRAY);
         raylib.text.DrawTextEx(fontRegular, nameText, new Vector2(inserisciNome.getX()+15, inserisciNome.getY()+15), fontSize, 2, Color.BLACK);
@@ -56,5 +62,6 @@ public class SalvaView {
 
     public void unload(){
         rText.UnloadFont(fontRegular);
+        raylib.textures.UnloadTexture(background);
     }
 }
